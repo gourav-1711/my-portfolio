@@ -39,7 +39,7 @@ export function ScrollProgressBar() {
       </div>
 
       {/* Percentage indicator */}
-      <div className="absolute -left-11 md:top-8 top-24 -translate-y-1/2 text-xs font-mono text-cyan-400 bg-gray-900/80 px-2 py-1 rounded backdrop-blur-sm border border-cyan-400/30">
+      <div className="hidden absolute -left-11 md:top-8 top-24 -translate-y-1/2 text-xs font-mono text-cyan-400 bg-gray-900/80 px-2 py-1 rounded backdrop-blur-sm border border-cyan-400/30">
         {Math.round(scrollProgress)}%
       </div>
 

@@ -103,7 +103,7 @@ export function FloatingDock() {
 
   return (
     <div
-      className={`fixed bottom-4 left-1/2 -translate-x-1/2 z-40 transition-all duration-300 ease-in-out ${
+      className={`block md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 transition-all duration-300 ease-in-out ${
         isVisible ? "translate-y-0" : "translate-y-24"
       }`}
     >

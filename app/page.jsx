@@ -34,14 +34,37 @@ import {
   Video,
   Layout,
   Music,
+  PopcornIcon,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ScrollProgressBar } from "../components/scroll-progress-bar";
 import Aos from "aos";
 import "aos/dist/aos.css";
-
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { Alert, AlertTitle } from "@/components/ui/alert";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 export default function HomePage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+
+  const router = useRouter();
+
+  const [alertOpen, setAlertOpen] = useState({
+    open: false,
+    type: "success",
+    message: "",
+  });
 
   useEffect(() => {
     Aos.init({
@@ -55,13 +78,6 @@ export default function HomePage() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -154,10 +170,119 @@ export default function HomePage() {
     },
   ];
 
+  // email send work
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      subject: e.target.subject.value,
+      message: e.target.message.value,
+    };
+
+    if (
+      data.name == "" ||
+      data.email == "" ||
+      data.subject == "" ||
+      data.message == ""
+    ) {
+      setOpen(true);
+      return;
+    } else {
+      setOpen(false);
+      setLoading(true);
+      await axios
+        .post("/api/send", data)
+        .then((response) => {
+          console.log(response);
+          if (response.data.success) {
+            setAlertOpen({
+              open: true,
+              type: response.data.success,
+              message: response.data.message,
+            });
+            setTimeout(() => {
+              setAlertOpen({
+                open: false,
+                type: response.data.success,
+                message: response.data.message,
+              });
+            }, 3000);
+            // router.push("/");
+            // router.refresh();
+            e.target.reset();
+          }
+        })
+        .catch((error) => {
+          console.error("Error sending email:", error);
+          setAlertOpen({
+            open: true,
+            type: "error",
+            message: "Email failed to send",
+          });
+          setTimeout(() => {
+            setAlertOpen({
+              open: false,
+              type: "error",
+              message: "Email failed to send",
+            });
+          }, 3000);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-gray-900 to-black relative overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-purple-400/30 via-gray-800/50 to-blue-500/30 relative overflow-x-hidden">
       <div className="fixed inset-0 -z-10">
         <AnimatedBackground />
+      </div>
+
+      {/* succes alert */}
+      <div
+        className={`fixed inset-0 bottom-4 z-50 ${
+          alertOpen.open ? "block" : "hidden"
+        }`}
+      >
+        <Alert
+          variant={alertOpen.type === "success" ? "success" : "destructive"}
+          className="flex fixed bottom-4 items-center gap-3 bg-gradient-to-r from-purple-400/30 via-gray-800/60 to-blue-500/30 backdrop-blur-xl border border-white/20 text-white rounded-xl shadow-lg p-4"
+        >
+          <PopcornIcon className="w-6 h-6 text-purple-300 drop-shadow-md" />
+          <AlertTitle className="text-sm font-semibold tracking-wide">
+            {alertOpen.message}
+          </AlertTitle>
+        </Alert>
+      </div>
+
+      {/* alert */}
+      <AlertDialog open={open} onOpenChange={setOpen}>
+        <AlertDialogContent className="bg-gradient-to-br from-purple-600/20 via-gray-900/20 to-slate-500/20 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl text-white">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-lg font-semibold text-white drop-shadow-md">
+              Please fill all fields
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-sm text-white/80">
+              Please fill all fields to send your message.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="flex justify-end gap-2">
+            <AlertDialogAction className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 transition-colors text-white font-medium border border-white/20 shadow-sm">
+              Continue
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* loading */}
+      <div
+        className={`fixed bg-black/50 inset-0 z-50 ${loading ? "block" : "hidden"}`}
+      >
+        <div className="flex items-center justify-center h-screen">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
+        </div>
       </div>
 
       <ScrollProgressBar />
@@ -167,12 +292,10 @@ export default function HomePage() {
 
       <FloatingDock />
 
-     
-
       {/* About Section */}
       <section
         id="about"
-        className="px-6 py-24 pt-32 max-w-7xl mx-auto relative z-10"
+        className="px-6 py-10 md:py-20 lg:py-24 pt-10 md:pt-20 lg:pt-32 max-w-6xl mx-auto relative z-10"
       >
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="space-y-6 md:space-y-8">
@@ -336,7 +459,7 @@ export default function HomePage() {
               <h3 className="text-xl font-semibold text-white mb-6">
                 Send me a message
               </h3>
-              <form className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label
@@ -348,6 +471,7 @@ export default function HomePage() {
                     <input
                       type="text"
                       id="name"
+                      name="name"
                       className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                       placeholder="John Doe"
                     />
@@ -362,6 +486,7 @@ export default function HomePage() {
                     <input
                       type="email"
                       id="email"
+                      name="email"
                       className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                       placeholder="john@example.com"
                     />
@@ -377,6 +502,7 @@ export default function HomePage() {
                   <input
                     type="text"
                     id="subject"
+                    name="subject"
                     className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     placeholder="What's this about?"
                   />
@@ -390,6 +516,7 @@ export default function HomePage() {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     rows={4}
                     className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     placeholder="Hi Gaurav, I'd like to discuss a project..."
@@ -398,7 +525,6 @@ export default function HomePage() {
                 </div>
                 <div className="pt-2">
                   <Button
-                    type="submit"
                     className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
                     size="lg"
                   >
@@ -539,7 +665,7 @@ export default function HomePage() {
                 </div>
               </div>
               <p className="text-gray-400 text-xs md:text-sm max-w-2xl mx-auto">
-                2024 Gaurav Dadhich. All rights reserved. | Privacy Policy |
+                2025 Gaurav Dadhich. All rights reserved. | Privacy Policy |
                 Terms of Service
               </p>
             </div>

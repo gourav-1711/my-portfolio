@@ -51,7 +51,7 @@ export function ScrollToTop() {
       onClick={scrollToTop}
       onTouchStart={handleTap}
       aria-label="Scroll to top"
-      className={`fixed right-4 bottom-20 md:right-6 md:bottom-8 z-30 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-pink-500 text-white shadow-lg shadow-purple-500/30 transition-all duration-300 transform ${
+      className={`fixed right-4 bottom-4 md:right-6 md:bottom-8 z-30 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-pink-500 text-white shadow-lg shadow-purple-500/30 transition-all duration-300 transform ${
         isVisible
           ? "opacity-100 translate-y-0 hover:scale-110 hover:shadow-xl hover:shadow-purple-500/50"
           : "opacity-0 translate-y-4 pointer-events-none"

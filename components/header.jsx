@@ -110,25 +110,29 @@ export function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "bg-black/80 backdrop-blur-md border-b border-white/20"
-            : "bg-transparent"
+        className={`max-w-5xl w-full  mt-2 mx-auto px-4  rounded-full fixed  top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled ? "" : ""
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          className={`${
+            isScrolled
+              ? "w-[90%] md:w-[87%] lg:w-[83%] bg-gray-700/20 backdrop-blur-md border-b border-white/30"
+              : "w-full bg-transparent"
+          } mx-auto px-4 sm:px-6 lg:px-8 rounded-full duration-500`}
+        >
           <div className="flex justify-between items-center h-16 md:h-20">
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
               <Link href="#" className="flex items-center space-x-3 group">
-                <AnimatedBorder
+                {/* <AnimatedBorder
                   className="w-10 h-10 md:w-12 md:h-12"
                   duration="2s"
                 >
                   <div className="w-full h-full bg-gradient-to-r from-gray-600 to-black rounded-xl flex items-center justify-center">
                     <span className="text-white text-sm font-bold">GD</span>
                   </div>
-                </AnimatedBorder>
+                </AnimatedBorder> */}
                 <div className="hidden sm:block">
                   <span className="font-bold text-lg text-white">
                     Gaurav Dadhich
@@ -147,7 +151,7 @@ export function Header() {
                 <Button
                   key={item.name}
                   variant="ghost"
-                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  className={` px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
                     activeSection === item.href.substring(1)
                       ? "text-white bg-white/10"
                       : "text-gray-300 hover:bg-white/5 hover:text-white"
@@ -187,7 +191,7 @@ export function Header() {
         {/* Mobile menu */}
         <div
           id="mobile-menu"
-          className={`md:hidden fixed inset-0 bg-black/95 backdrop-blur-sm z-[-1] transform transition-all duration-300 ease-in-out ${
+          className={`md:hidden fixed inset-0 bg-black/50 rounded-2xl backdrop-blur-sm z-[-1] transform transition-all duration-300 ease-in-out p-5 ${
             isMenuOpen
               ? "translate-y-16 opacity-100"
               : "-translate-y-full opacity-0 pointer-events-none"
