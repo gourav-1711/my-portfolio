@@ -14,8 +14,18 @@ import { ChevronLeft, ChevronRight, ExternalLink, Github } from "lucide-react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 export function ProjectSlider({ projects = [] }) {
+
+  useEffect(() => {
+    Aos.init({
+      duration: 500,
+      once: true,
+    });
+  }, []);
+
   const swiperRef = useRef(null);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -87,14 +97,17 @@ export function ProjectSlider({ projects = [] }) {
         className="w-full py-4 md:py-8"
       >
         {projects.map((project) => (
-          <SwiperSlide key={project.id} className="h-auto">
+          <SwiperSlide  key={project.id} className="h-auto">
             <Card className="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 transition-all duration-300 group h-full flex flex-col">
               <CardContent className="p-4 md:p-6 flex flex-col flex-grow">
                 <div className="mb-4 md:mb-6">
-                  <div
+                  {/* <div
                     className={`w-12 h-12 md:w-16 md:h-16 ${project.gradient} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mb-3 md:mb-4`}
                   >
                     {project.icon}
+                  </div> */}
+                  <div className=" rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mb-3 md:mb-4">
+                    <img src={project.img} alt={project.title} />
                   </div>
                   <h3 className="font-bold text-lg md:text-xl text-white mb-2 md:mb-3">
                     {project.title}

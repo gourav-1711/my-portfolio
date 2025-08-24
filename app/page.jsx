@@ -1,35 +1,21 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { ProjectSlider } from "@/components/project-slider";
 import { AnimatedBackground } from "@/components/animated-background";
 import { TypewriterEffect } from "@/components/typewriter-effect";
-import { SpotlightCard } from "@/components/spotlight-card";
 import { AnimatedBorder } from "@/components/animated-border";
 import { FloatingDock } from "@/components/floating-dock";
 import { Header } from "@/components/header";
 import {
   Github,
-  Twitter,
   Linkedin,
   Instagram,
   ShoppingCart,
-  User,
   Users,
-  FileText,
   MapPin,
   Mail,
   Phone,
-  ChevronUp,
-  Smartphone,
-  Globe,
-  Database,
-  Palette,
-  Home,
-  Briefcase,
-  FolderOpen,
-  MessageCircle,
   Download,
   Video,
   Layout,
@@ -51,14 +37,12 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { InfiniteMovingCards } from "../components/ui/infinite-moving-cards";
+
 export default function HomePage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-
-
-  const router = useRouter();
 
   const [alertOpen, setAlertOpen] = useState({
     open: false,
@@ -108,10 +92,11 @@ export default function HomePage() {
       description:
         "Electron + React desktop app to download YouTube videos and playlists with multiple formats using yt-dlp and ffmpeg.",
       icon: <Download className="w-8 h-8 text-white" />,
+      img: "/img/projects/pngeasy-downloader.png",
       gradient: "bg-gradient-to-r from-red-600 to-black",
       tags: ["Electron", "React", "Node.js", "yt-dlp", "ffmpeg"],
-      liveUrl: "#",
-      githubUrl: "#",
+      liveUrl: null,
+      githubUrl: "https://github.com/gourav-1711/easy-downloader-desktop",
     },
     {
       id: 2,
@@ -119,55 +104,142 @@ export default function HomePage() {
       description:
         "Screen and audio recorder built with Electron and JavaScript, allowing users to select formats for export.",
       icon: <Video className="w-8 h-8 text-white" />,
+      img: "/img/projects/screenRecorder.png",
       gradient: "bg-gradient-to-r from-gray-700 to-black",
       tags: ["Electron", "JavaScript"],
-      liveUrl: "#",
-      githubUrl: "#",
+      liveUrl: null,
+      githubUrl: "https://github.com/gourav-1711/screen-recorder",
     },
     {
       id: 3,
+      title: "A FullStack Furniture E-commerce Website",
+      description:
+        "E-commerce website built with Next.js and Tailwind CSS, featuring Premium UI and Responsive Design. and Smooth Animation.",
+      icon: <Users className="w-8 h-8 text-white" />,
+      img: "/img/projects/monsta.png",
+      gradient: "bg-gradient-to-r from-pink-600 to-black",
+      tags: ["Next", "Tailwind", "FullStack", "E-commerce"],
+      liveUrl: "https://monsta-ruddy.vercel.app/",
+      githubUrl: "https://github.com/gourav-1711/monsta",
+    },
+    {
+      id: 4,
       title: "Blinkit Clone",
       description:
         "A clone of Blinkit app built with React, featuring product listings and Context API for state management.",
       icon: <ShoppingCart className="w-8 h-8 text-white" />,
+      img: "/img/projects/blinkit.png",
       gradient: "bg-gradient-to-r from-green-600 to-black",
       tags: ["React", "Context API", "CSS"],
-      liveUrl: "#",
-      githubUrl: "#",
-    },
-    {
-      id: 4,
-      title: "Shaadi.com Clone",
-      description:
-        "Marriage portal mockup with responsive UI showcasing profile browsing and matchmaking features.",
-      icon: <Users className="w-8 h-8 text-white" />,
-      gradient: "bg-gradient-to-r from-pink-600 to-black",
-      tags: ["React", "CSS", "Responsive UI"],
-      liveUrl: "#",
-      githubUrl: "#",
+      liveUrl: "https://blinkit-lake.vercel.app/",
+      githubUrl: "https://github.com/gourav-1711/blinkit-clone",
     },
     {
       id: 5,
+      title: "Jewelry E-commerce Website",
+      description:
+        "E-commerce website built with React and Tailwind CSS, featuring Premium UI and Responsive Design. and Smooth Animation.",
+      icon: <Users className="w-8 h-8 text-white" />,
+      img: "/img/projects/jewellery.png",
+      gradient: "bg-gradient-to-r from-pink-600 to-black",
+      tags: ["React", "CSS", "Responsive UI"],
+      liveUrl: "https://jewellery-demo-eight.vercel.app/",
+      githubUrl: "https://github.com/gourav-1711/jewellery-demo",
+    },
+    {
+      id: 6,
       title: "Admin Panel Dashboard",
       description:
         "E-commerce admin dashboard with product, category, and user management system.",
       icon: <Layout className="w-8 h-8 text-white" />,
+      img: "/img/projects/admin-Panel.png",
       gradient: "bg-gradient-to-r from-gray-800 to-gray-600",
       tags: ["React", "Node.js", "MongoDB", "Express"],
-      liveUrl: "#",
-      githubUrl: "#",
+      liveUrl: "https://admin-panel-9tak.vercel.app/",
+      githubUrl: "https://github.com/gourav-1711/adminPanel",
     },
     {
-      id: 6,
+      id: 7,
       title: "Spotify UI Clone",
       description:
         "A clone of Spotify’s web interface built in React with modern UI styling and responsive layout.",
       icon: <Music className="w-8 h-8 text-white" />,
+      img: "/img/projects/spotify.png",
       gradient: "bg-gradient-to-r from-green-500 to-black",
       tags: ["React", "CSS", "Spotify UI"],
-      liveUrl: "#",
-      githubUrl: "#",
+      liveUrl: "https://spotify-ten-opal-97.vercel.app/",
+      githubUrl: "https://github.com/gourav-1711/Spotify-clone",
     },
+    {
+      id: 8,
+      title: "A Music Player",
+      description:
+        "A FullStack Music Player built with Next.js and Tailwind CSS, featuring YT Api ",
+      icon: <Music className="w-8 h-8 text-white" />,
+      img: "/img/projects/yt-music.png",
+      gradient: "bg-gradient-to-r from-green-500 to-black",
+      tags: ["Next", "Tailwind", "FullStack", "Music Player", "YT Api"],
+      liveUrl: "https://music-player-app-eosin.vercel.app/",
+      githubUrl: "https://github.com/gourav-1711/music-player-app",
+    },
+  ];
+
+  const skills = [
+    {
+      id: 1,
+      name: "HTML",
+      img: "/img/skills/HTML.png",
+    },
+    {
+      id: 2,
+      name: "CSS",
+      img: "/img/skills/CSS-Logo-PNG-Symbol-for-Web-Development-Transparent.png",
+    },
+    {
+      id: 3,
+      name: "JavaScript",
+      img: "/img/skills/Java-Script.png",
+    },
+    {
+      id: 4,
+      name: "React",
+      img: "/img/skills/React.png",
+    },
+    {
+      id: 5,
+      name: "Next.js",
+      img: "/img/skills/nextjs.svg",
+    },
+    {
+      id: 6,
+      name: "Node.js",
+      img: "/img/skills/Node-js.png",
+    },
+    {
+      id: 7,
+      name: "Electron Js",
+      img: "/img/skills/electron.png",
+    },
+    {
+      id: 8,
+      name: "MongoDB",
+      img: "/img/skills/mongo.png",
+    },
+    {
+      id: 9,
+      name: "Express.js",
+      img: "/img/skills/express.png",
+    },
+    {
+      id: 10,
+      name: "Tailwind CSS",
+      img: "/img/skills/Tailwind.png",
+    },
+    // {
+    //   id: 11,
+    //   name : "Figma",
+    //   img: "/img/skills/figma.png",
+    // }
   ];
 
   // email send work
@@ -278,7 +350,9 @@ export default function HomePage() {
 
       {/* loading */}
       <div
-        className={`fixed bg-black/50 inset-0 z-50 ${loading ? "block" : "hidden"}`}
+        className={`fixed bg-black/50 inset-0 z-50 ${
+          loading ? "block" : "hidden"
+        }`}
       >
         <div className="flex items-center justify-center h-screen">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
@@ -295,7 +369,7 @@ export default function HomePage() {
       {/* About Section */}
       <section
         id="about"
-        className="px-6 py-10 md:py-20 lg:py-24 pt-10 md:pt-20 lg:pt-32 max-w-6xl mx-auto relative z-10"
+        className="px-6 py-10 md:py-20 lg:py-24 pt-10 md:pt-20 lg:pt-24 max-w-6xl mx-auto relative z-10"
       >
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="space-y-6 md:space-y-8">
@@ -382,14 +456,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Skills Section */}
       <section id="services" className="px-6 py-12 md:py-16 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div data-aos="fade-up">
             <div className="text-center mb-12 md:mb-16 space-y-3 md:space-y-4">
               <div className="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
                 <span className="text-gray-300 text-xs md:text-sm font-medium">
-                  About Web Development
+                  My Skills
                 </span>
               </div>
               <h2 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent px-4">
@@ -398,9 +472,14 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {/* Service cards with similar responsive updates */}
-            {/* ... (rest of the service cards with responsive classes) */}
+          <div className="flex justify-center flex-wrap  gap-6 md:gap-8">
+            <InfiniteMovingCards items={skills} />
+            {/* {skills.map((skill) => (
+              <div data-aos="fade-up" data-aos-delay={skill.id * 100} key={skill.id} className="flex flex-col items-center hover:scale-110 transition-all cursor-pointer w-24 md:w-32">
+                <img src={skill.img} alt={skill.name} className="w-24 h-24 md:w-32 md:h-32" />
+                <h3 className="text-lg font-semibold mt-2">{skill.name}</h3>
+              </div>
+            ))} */}
           </div>
         </div>
       </section>
@@ -425,7 +504,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div data-aos="fade-up" data-aos-delay="400">
+          <div data-aos="fade-up" data-aos-delay="200">
             <ProjectSlider projects={projects} />
           </div>
         </div>
@@ -473,7 +552,7 @@ export default function HomePage() {
                       id="name"
                       name="name"
                       className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                      placeholder="John Doe"
+                      placeholder="Your Name"
                     />
                   </div>
                   <div>
@@ -488,7 +567,7 @@ export default function HomePage() {
                       id="email"
                       name="email"
                       className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                      placeholder="john@example.com"
+                      placeholder="YourEmail@example.com"
                     />
                   </div>
                 </div>
@@ -504,7 +583,7 @@ export default function HomePage() {
                     id="subject"
                     name="subject"
                     className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                    placeholder="What's this about?"
+                    placeholder="Your Subject Topic"
                   />
                 </div>
                 <div>
@@ -554,10 +633,10 @@ export default function HomePage() {
                         Email
                       </h4>
                       <a
-                        href="mailto:contact@example.com"
+                        href="mailto:gouravdadhich13@gmail.com"
                         className="text-white hover:text-purple-300 transition-colors text-sm sm:text-base"
                       >
-                        contact@example.com
+                        gouravdadhich13@gmail.com
                       </a>
                     </div>
                   </div>
@@ -570,10 +649,10 @@ export default function HomePage() {
                         Phone
                       </h4>
                       <a
-                        href="tel:+1234567890"
+                        href="tel:+918387840848"
                         className="text-white hover:text-purple-300 transition-colors text-sm sm:text-base"
                       >
-                        +1 (234) 567-890
+                        +91 8387840848
                       </a>
                     </div>
                   </div>
@@ -605,17 +684,12 @@ export default function HomePage() {
                       },
                       {
                         icon: Linkedin,
-                        href: "https://linkedin.com/in/yourprofile",
+                        href: "https://www.linkedin.com/in/gaurav-dadhich-92a571353/",
                         label: "LinkedIn",
                       },
                       {
-                        icon: Twitter,
-                        href: "https://twitter.com/yourhandle",
-                        label: "Twitter",
-                      },
-                      {
                         icon: Instagram,
-                        href: "https://instagram.com/yourhandle",
+                        href: "https://www.instagram.com/gaurav.dadhich/?igsh=bmQ1MnV0NDM0cDZn#",
                         label: "Instagram",
                       },
                     ].map((social, index) => (
@@ -640,7 +714,7 @@ export default function HomePage() {
 
       {/* Footer */}
       <div data-aos="fade">
-        <footer className="bg-black/50 backdrop-blur-md border-t border-white/10 px-6 py-8 md:py-12 mb-16 md:mb-0 relative z-10">
+        <footer className="bg-black/50 backdrop-blur-md border-t border-white/10 px-6 py-8 md:py-12 mb-4 md:mb-0 relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="text-center space-y-4">
               <div className="flex items-center justify-center space-x-3 mb-4 md:mb-6">

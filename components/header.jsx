@@ -14,6 +14,8 @@ import {
 import { Button } from "./ui/button";
 import { AnimatedBorder } from "./animated-border";
 import Link from "next/link";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const navItems = [
   { name: "About", href: "#about" },
@@ -23,18 +25,31 @@ const navItems = [
 ];
 
 const socialLinks = [
-  { icon: Github, href: "https://github.com/gourav-1711", label: "GitHub" },
+  {
+    icon: Github,
+    href: "https://github.com/gourav-1711",
+    label: "GitHub",
+  },
   {
     icon: Linkedin,
     href: "https://www.linkedin.com/in/gaurav-dadhich-92a571353/",
     label: "LinkedIn",
   },
-  { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-  { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-  { icon: Mail, href: "mailto:contact@example.com", label: "Email" },
+  {
+    icon: Instagram,
+    href: "https://www.instagram.com/gaurav.dadhich/?igsh=bmQ1MnV0NDM0cDZn#",
+    label: "Instagram",
+  },
 ];
 
 export function Header() {
+  useEffect(() => {
+    Aos.init({
+      duration: 700,
+      once: true,
+    });
+  }, []);
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
@@ -110,6 +125,8 @@ export function Header() {
   return (
     <>
       <header
+        data-aos="fade-down"
+        data-aos-delay={100}
         className={`max-w-5xl w-full  mt-2 mx-auto px-4  rounded-full fixed  top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled ? "" : ""
         }`}
@@ -133,7 +150,7 @@ export function Header() {
                     <span className="text-white text-sm font-bold">GD</span>
                   </div>
                 </AnimatedBorder> */}
-                <div className="hidden sm:block">
+                <div className="block">
                   <span className="font-bold text-lg text-white">
                     Gaurav Dadhich
                   </span>
