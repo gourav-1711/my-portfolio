@@ -152,7 +152,7 @@ export default function HomePage() {
       description:
         "E-commerce admin dashboard with product, category, and user management system.",
       icon: <Layout className="w-8 h-8 text-white" />,
-      img: "/img/projects/admin-Panel.png",
+      img: "/img/projects/admin-panel.png",
       gradient: "bg-gradient-to-r from-gray-800 to-gray-600",
       tags: ["React", "Node.js", "MongoDB", "Express"],
       liveUrl: "https://admin-panel-9tak.vercel.app/",
