@@ -151,3 +151,7 @@ html {
 .swiper-pagination-bullet-active {
   background-color: #fff !important;
 }
+
+button {
+  cursor: pointer;
+}

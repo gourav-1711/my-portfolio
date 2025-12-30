@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ProjectSlider } from "@/components/project-slider";
+import { ProjectsSection } from "@/components/projects-section";
 import { AnimatedBackground } from "@/components/animated-background";
 import { TypewriterEffect } from "@/components/typewriter-effect";
 import { AnimatedBorder } from "@/components/animated-border";
@@ -37,7 +37,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import axios from "axios";
-import { InfiniteMovingCards } from "../components/ui/infinite-moving-cards";
+import { SkillsSection } from "@/components/skills-section";
 
 export default function HomePage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -80,167 +80,14 @@ export default function HomePage() {
 
   const typewriterWords = [
     "Full Stack Developer",
-    "Electron Js Developer",
+    "React Native Developer",
     "Problem Solver",
     "Creative Thinker",
   ];
 
-  const projects = [
-    {
-      id: 1,
-      title: "YouTube Downloader Desktop App",
-      description:
-        "Electron + React desktop app to download YouTube videos and playlists with multiple formats using yt-dlp and ffmpeg.",
-      icon: <Download className="w-8 h-8 text-white" />,
-      img: "/img/projects/pngeasy-downloader.png",
-      gradient: "bg-gradient-to-r from-red-600 to-black",
-      tags: ["Electron", "React", "Node.js", "yt-dlp", "ffmpeg"],
-      liveUrl: null,
-      githubUrl: "https://github.com/gourav-1711/easy-downloader-desktop",
-    },
-    {
-      id: 2,
-      title: "Screen Recorder Desktop App",
-      description:
-        "Screen and audio recorder built with Electron and JavaScript, allowing users to select formats for export.",
-      icon: <Video className="w-8 h-8 text-white" />,
-      img: "/img/projects/screenRecorder.png",
-      gradient: "bg-gradient-to-r from-gray-700 to-black",
-      tags: ["Electron", "JavaScript"],
-      liveUrl: null,
-      githubUrl: "https://github.com/gourav-1711/screen-recorder",
-    },
-    {
-      id: 3,
-      title: "A FullStack Furniture E-commerce Website",
-      description:
-        "E-commerce website built with Next.js and Tailwind CSS, featuring Premium UI and Responsive Design. and Smooth Animation.",
-      icon: <Users className="w-8 h-8 text-white" />,
-      img: "/img/projects/monsta.png",
-      gradient: "bg-gradient-to-r from-pink-600 to-black",
-      tags: ["Next", "Tailwind", "FullStack", "E-commerce"],
-      liveUrl: "https://monsta-ruddy.vercel.app/",
-      githubUrl: "https://github.com/gourav-1711/monsta",
-    },
-    {
-      id: 4,
-      title: "Blinkit Clone",
-      description:
-        "A clone of Blinkit app built with React, featuring product listings and Context API for state management.",
-      icon: <ShoppingCart className="w-8 h-8 text-white" />,
-      img: "/img/projects/blinkit.png",
-      gradient: "bg-gradient-to-r from-green-600 to-black",
-      tags: ["React", "Context API", "CSS"],
-      liveUrl: "https://blinkit-lake.vercel.app/",
-      githubUrl: "https://github.com/gourav-1711/blinkit-clone",
-    },
-    {
-      id: 5,
-      title: "Jewelry E-commerce Website",
-      description:
-        "E-commerce website built with React and Tailwind CSS, featuring Premium UI and Responsive Design. and Smooth Animation.",
-      icon: <Users className="w-8 h-8 text-white" />,
-      img: "/img/projects/jewellery.png",
-      gradient: "bg-gradient-to-r from-pink-600 to-black",
-      tags: ["React", "CSS", "Responsive UI"],
-      liveUrl: "https://jewellery-demo-eight.vercel.app/",
-      githubUrl: "https://github.com/gourav-1711/jewellery-demo",
-    },
-    {
-      id: 6,
-      title: "Admin Panel Dashboard",
-      description:
-        "E-commerce admin dashboard with product, category, and user management system.",
-      icon: <Layout className="w-8 h-8 text-white" />,
-      img: "/img/projects/admin-panel.png",
-      gradient: "bg-gradient-to-r from-gray-800 to-gray-600",
-      tags: ["React", "Node.js", "MongoDB", "Express"],
-      liveUrl: "https://admin-panel-9tak.vercel.app/",
-      githubUrl: "https://github.com/gourav-1711/adminPanel",
-    },
-    {
-      id: 7,
-      title: "Spotify UI Clone",
-      description:
-        "A clone of Spotify’s web interface built in React with modern UI styling and responsive layout.",
-      icon: <Music className="w-8 h-8 text-white" />,
-      img: "/img/projects/spotify.png",
-      gradient: "bg-gradient-to-r from-green-500 to-black",
-      tags: ["React", "CSS", "Spotify UI"],
-      liveUrl: "https://spotify-ten-opal-97.vercel.app/",
-      githubUrl: "https://github.com/gourav-1711/Spotify-clone",
-    },
-    {
-      id: 8,
-      title: "A Music Player",
-      description:
-        "A FullStack Music Player built with Next.js and Tailwind CSS, featuring YT Api ",
-      icon: <Music className="w-8 h-8 text-white" />,
-      img: "/img/projects/yt-music.png",
-      gradient: "bg-gradient-to-r from-green-500 to-black",
-      tags: ["Next", "Tailwind", "FullStack", "Music Player", "YT Api"],
-      liveUrl: "https://music-player-app-eosin.vercel.app/",
-      githubUrl: "https://github.com/gourav-1711/music-player-app",
-    },
-  ];
+  // projects data moved to ProjectsSection component
 
-  const skills = [
-    {
-      id: 1,
-      name: "HTML",
-      img: "/img/skills/HTML.png",
-    },
-    {
-      id: 2,
-      name: "CSS",
-      img: "/img/skills/CSS-Logo-PNG-Symbol-for-Web-Development-Transparent.png",
-    },
-    {
-      id: 3,
-      name: "JavaScript",
-      img: "/img/skills/Java-Script.png",
-    },
-    {
-      id: 4,
-      name: "React",
-      img: "/img/skills/React.png",
-    },
-    {
-      id: 5,
-      name: "Next.js",
-      img: "/img/skills/nextjs.svg",
-    },
-    {
-      id: 6,
-      name: "Node.js",
-      img: "/img/skills/Node-js.png",
-    },
-    {
-      id: 7,
-      name: "Electron Js",
-      img: "/img/skills/electron.png",
-    },
-    {
-      id: 8,
-      name: "MongoDB",
-      img: "/img/skills/mongo.png",
-    },
-    {
-      id: 9,
-      name: "Express.js",
-      img: "/img/skills/express.png",
-    },
-    {
-      id: 10,
-      name: "Tailwind CSS",
-      img: "/img/skills/Tailwind.png",
-    },
-    // {
-    //   id: 11,
-    //   name : "Figma",
-    //   img: "/img/skills/figma.png",
-    // }
-  ];
+  // skills array moved to SkillsSection component
 
   // email send work
   const handleSubmit = async (e) => {
@@ -472,14 +319,8 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="flex justify-center flex-wrap  gap-6 md:gap-8">
-            <InfiniteMovingCards items={skills} />
-            {/* {skills.map((skill) => (
-              <div data-aos="fade-up" data-aos-delay={skill.id * 100} key={skill.id} className="flex flex-col items-center hover:scale-110 transition-all cursor-pointer w-24 md:w-32">
-                <img src={skill.img} alt={skill.name} className="w-24 h-24 md:w-32 md:h-32" />
-                <h3 className="text-lg font-semibold mt-2">{skill.name}</h3>
-              </div>
-            ))} */}
+          <div className="w-full">
+            <SkillsSection />
           </div>
         </div>
       </section>
@@ -488,7 +329,7 @@ export default function HomePage() {
       <section id="projects" className="px-6 py-12 md:py-16 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div data-aos="fade-up">
-            <div className="text-center mb-12 md:mb-16 space-y-3 md:space-y-4">
+            <div className="text-center mb-8 md:mb-12 space-y-3 md:space-y-4">
               <div className="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
                 <span className="text-gray-300 text-xs md:text-sm font-medium">
                   Portfolio Showcase
@@ -505,7 +346,7 @@ export default function HomePage() {
           </div>
 
           <div data-aos="fade-up" data-aos-delay="200">
-            <ProjectSlider projects={projects} />
+            <ProjectsSection />
           </div>
         </div>
       </section>
