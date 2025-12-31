@@ -48,7 +48,7 @@ const projects = [
     gradient: "bg-gradient-to-r from-red-600 to-black",
     tags: ["Electron", "React", "Node.js", "yt-dlp", "ffmpeg"],
     liveUrl: null,
-    githubUrl: "https://github.com/gourav-1711/easy-downloader-desktop",
+    githubUrl: "https://github.com/gourav-1711/video-downloader-desktop/",
     category: ["all", "desktop-app"],
   },
   {

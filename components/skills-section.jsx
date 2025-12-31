@@ -11,7 +11,7 @@ const skills = [
     img: "/img/skills/HTML.png",
     description:
       "The standard markup language for documents designed to be displayed in a web browser. It is the building block of the web.",
-    progress: 95,
+    progress: 100,
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const skills = [
     img: "/img/skills/CSS-Logo-PNG-Symbol-for-Web-Development-Transparent.png",
     description:
       "Cascading Style Sheets is a style sheet language used for describing the presentation of a document written in HTML.",
-    progress: 90,
+    progress: 100,
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const skills = [
     img: "/img/skills/Java-Script.png",
     description:
       "A high-level, interpreted programming language that conforms to the ECMAScript specification. It enables interactive web pages.",
-    progress: 90,
+    progress: 100,
   },
   {
     id: 4,
@@ -35,7 +35,7 @@ const skills = [
     img: "/img/skills/React.png",
     description:
       "A JavaScript library for building user interfaces. It allows for the creation of reusable UI components.",
-    progress: 85,
+    progress: 95,
   },
   {
     id: 5,
@@ -43,7 +43,7 @@ const skills = [
     img: "/img/skills/nextjs.svg",
     description:
       "A React framework that enables server-side rendering and generating static websites for React based web applications.",
-    progress: 85,
+    progress: 98,
   },
   {
     id: 6,
@@ -51,7 +51,7 @@ const skills = [
     img: "/img/skills/Node-js.png",
     description:
       "An open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser.",
-    progress: 80,
+    progress: 90,
   },
   {
     id: 7,
@@ -59,7 +59,7 @@ const skills = [
     img: "/img/skills/electron.png",
     description:
       "A framework for creating native applications with web technologies like JavaScript, HTML, and CSS.",
-    progress: 75,
+    progress: 65,
   },
   {
     id: 8,
@@ -67,7 +67,7 @@ const skills = [
     img: "/img/skills/mongo.png",
     description:
       "A source-available cross-platform document-oriented database program. Classified as a NoSQL database program.",
-    progress: 80,
+    progress: 90,
   },
   {
     id: 9,
@@ -75,7 +75,7 @@ const skills = [
     img: "/img/skills/express.png",
     description:
       "A back-end web application framework for Node.js. It is designed for building web applications and APIs.",
-    progress: 80,
+    progress: 100,
   },
   {
     id: 10,
@@ -83,7 +83,7 @@ const skills = [
     img: "/img/skills/Tailwind.png",
     description:
       "A utility-first CSS framework for rapidly building custom designs without ever leaving your HTML.",
-    progress: 95,
+    progress: 100,
   },
   {
     id: 11,
@@ -91,7 +91,7 @@ const skills = [
     img: "/img/skills/typescript.png",
     description:
       "A typed superset of JavaScript that compiles to plain JavaScript. It adds optional types to the language.",
-    progress: 80,
+    progress: 70,
   },
   {
     id: 12,
@@ -99,7 +99,7 @@ const skills = [
     img: "/img/skills/react-native.png",
     description:
       "A framework for building native applications using React. It allows you to use the same code base for iOS and Android.",
-    progress: 75,
+    progress: 85,
   },
   {
     id: 13,
@@ -107,7 +107,7 @@ const skills = [
     img: "/img/skills/figma.png",
     description:
       "A vector graphics editor and prototyping tool which is primarily web-based.",
-    progress: 70,
+    progress: 40,
   },
 ];
 
