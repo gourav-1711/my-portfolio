@@ -148,7 +148,7 @@ const projects = [
     description:
       "A feature-rich e-commerce application built with React Native and Expo, utilizing Zustand for efficient global state management.",
     icon: <ShoppingCart className="w-8 h-8 text-white" />,
-    img: "/img/projects/rn-ecommerce.png",
+    img: "/img/projects/rn-ecommerce.jpg",
     gradient: "bg-gradient-to-r from-purple-600 to-black",
     tags: ["React Native", "Expo", "Zustand"],
     liveUrl: null,
