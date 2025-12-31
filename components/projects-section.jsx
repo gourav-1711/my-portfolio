@@ -40,9 +40,9 @@ const projects = [
   },
   {
     id: 1,
-    title: "YouTube Downloader Desktop App",
+    title: "Videos Downloader Desktop App",
     description:
-      "Electron + React desktop app to download YouTube videos and playlists with multiple formats using yt-dlp and ffmpeg.",
+      "Electron + React desktop app to download Videos  and playlists with multiple formats using yt-dlp and ffmpeg.",
     icon: <Download className="w-8 h-8 text-white" />,
     img: "/img/projects/pngeasy-downloader.png",
     gradient: "bg-gradient-to-r from-red-600 to-black",
@@ -79,7 +79,7 @@ const projects = [
   },
   {
     id: 4,
-    title: "Blinkit Clone",
+    title: "Blinkit UI Clone",
     description:
       "A clone of Blinkit app built with React, featuring product listings and Context API for state management.",
     icon: <ShoppingCart className="w-8 h-8 text-white" />,
@@ -92,7 +92,7 @@ const projects = [
   },
   {
     id: 5,
-    title: "Jewelry E-commerce Website",
+    title: "Jewelry E-commerce Website UI",
     description:
       "E-commerce website built with React and Tailwind CSS, featuring Premium UI and Responsive Design. and Smooth Animation.",
     icon: <Users className="w-8 h-8 text-white" />,
@@ -101,7 +101,7 @@ const projects = [
     tags: ["React", "CSS", "Responsive UI"],
     liveUrl: "https://jewellery-demo-eight.vercel.app/",
     githubUrl: "https://github.com/gourav-1711/jewellery-demo",
-    category: ["all", "e-commerce"],
+    category: ["all"],
   },
   {
     id: 6,
@@ -131,7 +131,7 @@ const projects = [
   },
   {
     id: 8,
-    title: "A Music Player",
+    title: "A Next js Music Player",
     description:
       "A FullStack Music Player built with Next.js and Tailwind CSS, featuring YT Api ",
     icon: <Music className="w-8 h-8 text-white" />,
@@ -141,6 +141,33 @@ const projects = [
     liveUrl: "https://music-player-app-eosin.vercel.app/",
     githubUrl: "https://github.com/gourav-1711/music-player-app",
     category: ["all", "fullstack"],
+  },
+  {
+    id: 11,
+    title: "React Native E-commerce App",
+    description:
+      "A feature-rich e-commerce application built with React Native and Expo, utilizing Zustand for efficient global state management.",
+    icon: <ShoppingCart className="w-8 h-8 text-white" />,
+    img: "/img/projects/rn-ecommerce.png",
+    gradient: "bg-gradient-to-r from-purple-600 to-black",
+    tags: ["React Native", "Expo", "Zustand"],
+    liveUrl: null,
+    githubUrl:
+      "https://github.com/gourav-1711/react-native_e-commerce-application",
+    category: ["all", "react-native", "e-commerce"],
+  },
+  {
+    id: 12,
+    title: "Image Optimizer App",
+    description:
+      "An efficient image optimization tool built with React Native and Expo that significantly reduces image file sizes.",
+    icon: <Layout className="w-8 h-8 text-white" />,
+    img: "/img/projects/image-optimizer.jpg",
+    gradient: "bg-gradient-to-r from-blue-600 to-black",
+    tags: ["React Native", "Expo", "Image Processing"],
+    liveUrl: null,
+    githubUrl: "https://github.com/gourav-1711/image-optimizer",
+    category: ["all", "react-native"],
   },
 ];
 
