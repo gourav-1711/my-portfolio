@@ -1,7 +1,9 @@
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { Providers } from "@/components/providers";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -48,10 +50,13 @@ export default function RootLayout({ children }) {
         `}</style>
       </head>
       <body className="dark overflow-x-hidden">
-        <div className="min-h-screen flex flex-col">
-          {children}
-          <ScrollToTop />
-        </div>
+        <Providers>
+          <div className="min-h-screen flex flex-col">
+            {children}
+            <ScrollToTop />
+            <Toaster position="bottom-right" theme="dark" />
+          </div>
+        </Providers>
       </body>
     </html>
   );

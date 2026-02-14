@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
 
-
+// email send api
 export async function POST(req) {
     console.log("route hit");
     

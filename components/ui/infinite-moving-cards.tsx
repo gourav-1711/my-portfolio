@@ -1,27 +1,59 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import Aos from "aos";
 import "aos/dist/aos.css";
+
+interface MovingCardItem {
+  name: string;
+  img: string;
+  title?: string;
+}
+
+interface InfiniteMovingCardsProps {
+  items: MovingCardItem[];
+  direction?: "left" | "right";
+  speed?: "fast" | "normal" | "slow";
+  pauseOnHover?: boolean;
+  className?: string;
+}
+
 export const InfiniteMovingCards = ({
   items,
   direction = "left",
   speed = "fast",
   pauseOnHover = true,
   className,
-}) => {
-  const containerRef = React.useRef(null);
-  const scrollerRef = React.useRef(null);
-
-  useEffect(() => {
-    addAnimation();
-    Aos.init({
-      duration: 700,
-    });
-  }, []);
+}: InfiniteMovingCardsProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLUListElement>(null);
   const [start, setStart] = useState(false);
-  function addAnimation() {
+
+  const getDirection = useCallback(() => {
+    if (containerRef.current) {
+      containerRef.current.style.setProperty(
+        "--animation-direction",
+        direction === "left" ? "forwards" : "reverse",
+      );
+    }
+  }, [direction]);
+
+  const getSpeed = useCallback(() => {
+    if (containerRef.current) {
+      const durations: Record<string, string> = {
+        fast: "20s",
+        normal: "40s",
+        slow: "80s",
+      };
+      containerRef.current.style.setProperty(
+        "--animation-duration",
+        durations[speed] || "40s",
+      );
+    }
+  }, [speed]);
+
+  const addAnimation = useCallback(() => {
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
 
@@ -36,39 +68,21 @@ export const InfiniteMovingCards = ({
       getSpeed();
       setStart(true);
     }
-  }
-  const getDirection = () => {
-    if (containerRef.current) {
-      if (direction === "left") {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "forwards"
-        );
-      } else {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "reverse"
-        );
-      }
-    }
-  };
-  const getSpeed = () => {
-    if (containerRef.current) {
-      if (speed === "fast") {
-        containerRef.current.style.setProperty("--animation-duration", "20s");
-      } else if (speed === "normal") {
-        containerRef.current.style.setProperty("--animation-duration", "40s");
-      } else {
-        containerRef.current.style.setProperty("--animation-duration", "80s");
-      }
-    }
-  };
+  }, [getDirection, getSpeed]);
+
+  useEffect(() => {
+    addAnimation();
+    Aos.init({
+      duration: 700,
+    });
+  }, [addAnimation]);
+
   return (
     <div
       ref={containerRef}
       className={cn(
         "scroller relative z-20 max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
-        className
+        className,
       )}
     >
       <ul
@@ -76,7 +90,7 @@ export const InfiniteMovingCards = ({
         className={cn(
           "flex w-max min-w-full shrink-0 flex-nowrap gap-4 py-4",
           start && "animate-scroll",
-          pauseOnHover && "hover:[animation-play-state:paused]"
+          pauseOnHover && "hover:[animation-play-state:paused]",
         )}
       >
         {items.map((item, idx) => (

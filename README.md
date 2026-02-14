@@ -1,6 +1,12 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My App
 
-## Getting Started
+This project is a Next.js Progressive Web App (PWA).
+
+## Customizing PWA Icons
+The current PWA icons are placeholders. To use your own:
+1. Replace `public/icon-192x192.png` with your 192x192 icon.
+2. Replace `public/icon-512x512.png` with your 512x512 icon.
+
 
 First, run the development server:
 
