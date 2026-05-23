@@ -1,11 +1,22 @@
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import { Hanken_Grotesk, Playfair_Display } from "next/font/google";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { Providers } from "@/components/providers";
 import "swiper/css";
 import "swiper/css/pagination";
+
+const hankenGrotesk = Hanken_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-hanken",
+  display: "swap",
+});
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+});
 
 export const metadata = {
   title: "Gaurav Dadhich | Portfolio",
@@ -24,7 +35,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html
+      lang="en"
+      className={`${hankenGrotesk.variable} ${playfairDisplay.variable} scroll-smooth`}
+    >
       <head>
         <meta name="theme-color" content="#000000" />
         <meta name="mobile-web-app-capable" content="yes" />
@@ -33,23 +47,8 @@ export default function RootLayout({ children }) {
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
         />
-        <style>{`
-          html {
-            font-family: ${GeistSans.style.fontFamily};
-            --font-sans: ${GeistSans.variable};
-            --font-mono: ${GeistMono.variable};
-            -webkit-text-size-adjust: 100%;
-            -webkit-tap-highlight-color: transparent;
-          }
-          
-          @media (max-width: 640px) {
-            html {
-              font-size: 16px;
-            }
-          }
-        `}</style>
       </head>
-      <body className="dark overflow-x-hidden">
+      <body className="dark overflow-x-hidden bg-background font-sans text-foreground antialiased">
         <Providers>
           <div className="min-h-screen flex flex-col">
             {children}

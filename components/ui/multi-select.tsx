@@ -58,7 +58,7 @@ export function MultiSelect({
   };
 
   if (isLoading) {
-    return <div className="h-10 w-full bg-white/5 animate-pulse rounded-lg" />;
+    return <div className="h-11 w-full animate-pulse border border-border bg-card" />;
   }
 
   return (
@@ -67,26 +67,26 @@ export function MultiSelect({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between bg-[#0f0f0f] border border-white/10 rounded-xl px-4 py-3 text-left hover:border-white/20 transition-colors min-h-[44px]"
+        className="flex min-h-11 w-full items-center justify-between border border-border bg-background px-4 py-3 text-left transition-colors hover:border-primary"
       >
         <div className="flex flex-wrap items-center gap-1.5 flex-1 mr-2">
           {selected.length === 0 ? (
-            <span className="text-gray-500 text-sm">{placeholder}</span>
+            <span className="text-sm text-muted-foreground">{placeholder}</span>
           ) : (
             selected.map((val) => {
               const label = options.find((o) => o.value === val)?.label || val;
               return (
                 <span
                   key={val}
-                  className="inline-flex items-center gap-1 px-2 py-0.5 bg-purple-500/20 border border-purple-500/30 rounded-md text-xs text-purple-300"
+                  className="editorial-label inline-flex items-center gap-1 border border-border px-2 py-1 text-muted-foreground"
                 >
                   {label}
                   <button
                     type="button"
                     onClick={(e) => removeOption(val, e)}
-                    className="hover:text-white transition-colors"
+                    className="transition-colors hover:text-foreground"
                   >
-                    <X className="w-3 h-3" />
+                    <X className="size-3" />
                   </button>
                 </span>
               );
@@ -95,7 +95,7 @@ export function MultiSelect({
         </div>
         <ChevronDown
           className={clsx(
-            "w-4 h-4 text-gray-400 transition-transform shrink-0",
+            "size-4 shrink-0 text-muted-foreground transition-transform",
             isOpen && "rotate-180",
           )}
         />
@@ -108,10 +108,10 @@ export function MultiSelect({
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="absolute z-50 mt-2 w-full bg-[#1a1a1a] border border-white/10 rounded-xl shadow-xl overflow-hidden max-h-48 overflow-y-auto"
+            className="absolute z-50 mt-2 max-h-48 w-full overflow-hidden overflow-y-auto border border-border bg-card shadow-none"
           >
             {options.length === 0 ? (
-              <div className="px-4 py-3 text-sm text-gray-500">
+              <div className="px-4 py-3 text-sm text-muted-foreground">
                 No options available
               </div>
             ) : (
@@ -122,22 +122,22 @@ export function MultiSelect({
                     key={opt.value}
                     type="button"
                     onClick={() => toggleOption(opt.value)}
-                    className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-colors"
+                    className="flex w-full items-center gap-3 px-4 py-3 transition-colors hover:bg-secondary"
                   >
                     <div
                       className={clsx(
-                        "w-4 h-4 rounded border flex items-center justify-center transition-colors shrink-0",
+                        "flex size-4 shrink-0 items-center justify-center border transition-colors",
                         isSelected
-                          ? "bg-purple-500 border-purple-500"
-                          : "border-white/20 bg-transparent",
+                          ? "border-primary bg-primary"
+                          : "border-border bg-transparent",
                       )}
                     >
-                      {isSelected && <Check className="w-3 h-3 text-white" />}
+                      {isSelected && <Check className="size-3 text-primary-foreground" />}
                     </div>
                     <span
                       className={clsx(
                         "text-sm",
-                        isSelected ? "text-white font-medium" : "text-gray-400",
+                        isSelected ? "font-medium text-foreground" : "text-muted-foreground",
                       )}
                     >
                       {opt.label}

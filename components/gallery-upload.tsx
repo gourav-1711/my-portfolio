@@ -77,7 +77,7 @@ export default function GalleryUpload({
       {/* Upload Area */}
       <div
         className={cn(
-          "relative rounded-lg border border-dashed p-8 text-center transition-colors",
+          "relative border border-dashed p-8 text-center transition-colors",
           isDragging
             ? "border-primary bg-primary/5"
             : "border-muted-foreground/25 hover:border-muted-foreground/50",
@@ -92,20 +92,22 @@ export default function GalleryUpload({
         <div className="flex flex-col items-center gap-4">
           <div
             className={cn(
-              "flex h-16 w-16 items-center justify-center rounded-full",
+              "flex size-16 items-center justify-center border border-border",
               isDragging ? "bg-primary/10" : "bg-muted",
             )}
           >
             <ImageIcon
               className={cn(
-                "h-5 w-5",
+                "size-5",
                 isDragging ? "text-primary" : "text-muted-foreground",
               )}
             />
           </div>
 
           <div className="space-y-2">
-            <h3 className="text-lg font-semibold">Upload images to gallery</h3>
+            <h3 className="font-serif text-xl font-semibold">
+              Upload images to gallery
+            </h3>
             <p className="text-sm text-muted-foreground">
               Drag and drop images here or click to browse
             </p>
@@ -116,7 +118,7 @@ export default function GalleryUpload({
           </div>
 
           <Button type="button" onClick={openFileDialog}>
-            <Upload className="h-4 w-4" />
+            <Upload data-icon="inline-start" />
             Select images
           </Button>
         </div>
@@ -156,16 +158,16 @@ export default function GalleryUpload({
                 <img
                   src={fileItem.preview}
                   alt={fileItem.file.name}
-                  className="h-full w-full rounded-lg border object-cover transition-transform group-hover:scale-105"
+                  className="h-full w-full border object-cover transition-transform group-hover:scale-105"
                 />
               ) : (
-                <div className="flex h-full w-full items-center justify-center rounded-lg border bg-muted">
-                  <ImageIcon className="h-8 w-8 text-muted-foreground" />
+                <div className="flex h-full w-full items-center justify-center border bg-muted">
+                  <ImageIcon className="size-8 text-muted-foreground" />
                 </div>
               )}
 
               {/* Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center gap-2 rounded-lg bg-black/50 opacity-0 transition-opacity group-hover:opacity-100">
+              <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/60 opacity-0 transition-opacity group-hover:opacity-100">
                 {/* View Button */}
                 {fileItem.preview && (
                   <Button
@@ -192,7 +194,7 @@ export default function GalleryUpload({
               </div>
 
               {/* File Info */}
-              <div className="absolute bottom-0 left-0 right-0 rounded-b-lg bg-black/70 p-2 text-white opacity-0 transition-opacity group-hover:opacity-100">
+              <div className="absolute bottom-0 left-0 right-0 bg-black/80 p-2 text-white opacity-0 transition-opacity group-hover:opacity-100">
                 <p className="truncate text-xs font-medium">
                   {fileItem.file.name}
                 </p>
@@ -227,14 +229,14 @@ export default function GalleryUpload({
       {/* Image Preview Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm transition-all duration-300 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4 transition-all duration-300"
           onClick={() => setSelectedImage(null)}
         >
           <div className="relative max-h-full max-w-full">
             <img
               src={selectedImage}
               alt="Preview"
-              className="max-h-full max-w-full rounded-lg object-contain"
+              className="max-h-full max-w-full border border-border object-contain"
               onClick={(e) => e.stopPropagation()}
             />
             <Button
@@ -244,7 +246,7 @@ export default function GalleryUpload({
               size="icon"
               className="absolute end-2 top-2 size-7 p-0"
             >
-              <XIcon className="h-4 w-4" />
+              <XIcon className="size-4" />
             </Button>
           </div>
         </div>

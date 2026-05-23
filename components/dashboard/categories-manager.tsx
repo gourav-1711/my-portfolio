@@ -65,44 +65,46 @@ export default function CategoriesManager() {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-white">Categories</h2>
+        <h2 className="font-serif text-3xl font-semibold text-foreground">
+          Categories
+        </h2>
         <Button
           onClick={() => setIsModalOpen(true)}
-          className="bg-purple-600 hover:bg-purple-700 text-white"
+          className="editorial-button"
         >
-          <Plus className="w-4 h-4 mr-2" /> Add Category
+          <Plus data-icon="inline-start" /> Add Category
         </Button>
       </div>
 
       {isLoading ? (
         <div className="flex justify-center py-8">
-          <Loader2 className="w-6 h-6 animate-spin text-purple-500" />
+          <Loader2 className="size-6 animate-spin text-foreground" />
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {categories?.map((cat) => (
             <div
               key={cat.id}
-              className="bg-white/5 border border-white/10 rounded-lg p-4 flex justify-between items-center group hover:bg-white/10 transition-colors"
+              className="group flex items-center justify-between border border-border bg-card p-5 transition-colors hover:bg-secondary"
             >
-              <span className="text-gray-200 font-medium">{cat.name}</span>
+              <span className="font-medium text-foreground">{cat.name}</span>
               <button
                 onClick={() => deleteCategoryMutation.mutate(cat.id)}
                 disabled={deletingId === cat.id}
-                className="text-gray-500 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100 disabled:opacity-100 disabled:cursor-not-allowed"
+                className="text-muted-foreground opacity-0 transition-colors hover:text-destructive disabled:cursor-not-allowed disabled:opacity-100 group-hover:opacity-100"
               >
                 {deletingId === cat.id ? (
-                  <Loader2 className="w-4 h-4 animate-spin text-red-500" />
+                  <Loader2 className="size-4 animate-spin text-destructive" />
                 ) : (
-                  <Trash2 className="w-4 h-4" />
+                  <Trash2 className="size-4" />
                 )}
               </button>
             </div>
           ))}
           {categories?.length === 0 && (
-            <p className="text-gray-500 col-span-full text-center py-4">
+            <p className="col-span-full py-4 text-center text-muted-foreground">
               No categories found. Add one to get started.
             </p>
           )}
@@ -116,21 +118,21 @@ export default function CategoriesManager() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4"
           >
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-[#0f0f0f] border border-white/10 rounded-xl p-6 w-full max-w-sm shadow-2xl relative"
+              className="relative w-full max-w-sm border border-border bg-card p-6 shadow-none"
             >
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="absolute top-4 right-4 text-gray-400 hover:text-white"
+                className="absolute right-4 top-4 text-muted-foreground hover:text-foreground"
               >
-                <X className="w-5 h-5" />
+                <X className="size-5" />
               </button>
-              <h3 className="text-xl font-semibold text-white mb-6">
+              <h3 className="mb-6 font-serif text-2xl font-semibold text-foreground">
                 Add New Category
               </h3>
 
@@ -145,7 +147,7 @@ export default function CategoriesManager() {
                 {({ isSubmitting }) => (
                   <Form className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-1">
+                      <label className="editorial-label mb-1 block text-muted-foreground">
                         Category Name
                       </label>
                       <Field
@@ -164,16 +166,16 @@ export default function CategoriesManager() {
                       <Button
                         type="submit"
                         disabled={isSubmitting || addCategoryMutation.isPending}
-                        className="bg-purple-600 hover:bg-purple-700 text-white w-full flex items-center justify-center"
+                        className="editorial-button flex w-full items-center justify-center"
                       >
                         {isSubmitting || addCategoryMutation.isPending ? (
                           <>
-                            <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                            <Loader2 data-icon="inline-start" className="animate-spin" />
                             Creating...
                           </>
                         ) : (
                           <>
-                            <Plus className="w-4 h-4 mr-2" />
+                            <Plus data-icon="inline-start" />
                             Create Category
                           </>
                         )}

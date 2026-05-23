@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+"use client";
+
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight, Code2, Maximize2, X } from "lucide-react";
+
+import { Badge } from "@/components/ui/badge";
 import { Project } from "@/lib/types";
-import { cn } from "@/lib/utils";
-import { ArrowUpRight, Github, Maximize2, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 
 interface ProjectCardProps {
   project: Project;
@@ -17,84 +20,66 @@ export function ProjectCard({ project }: ProjectCardProps) {
     setMounted(true);
   }, []);
 
-  // Default gradient if none provided
-  const gradient = project.gradient || "from-purple-500 to-pink-500";
+  const primaryCategory = Array.isArray(project.category)
+    ? project.category[0]
+    : project.category;
 
   return (
     <>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="group relative h-full flex flex-col bg-[#0a0a0a] rounded-2xl border border-white/10 overflow-hidden hover:border-purple-500/30 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/10"
-      >
-        {/* 1. MEDIA CONTAINER - Fixed Aspect Ratio */}
-        <div className="relative w-full aspect-video bg-gray-900 overflow-hidden">
-          {/* Blurred Background for 9:16 images */}
-          <div
-            className="absolute inset-0 bg-cover bg-center blur-xl opacity-40 scale-110"
-            style={{ backgroundImage: `url(${project.img})` }}
-          />
-
-          {/* Main Image - Contained */}
+      <article className="group flex h-full flex-col">
+        <div className="relative aspect-[4/5] overflow-hidden border border-border bg-card">
           <img
             src={project.img}
             alt={project.title}
-            className="relative z-10 w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+            className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
           />
+          <div className="absolute inset-0 bg-black/25 transition-colors group-hover:bg-black/10" />
 
-          {/* Floating Tags - Top Right */}
-          <div className="absolute top-3 right-3 z-20 flex flex-wrap justify-end gap-1.5 max-w-[70%]">
-            {project.tags?.slice(0, 3).map((tag, i) => (
-              <span
-                key={i}
-                className="px-2 py-1 text-[10px] font-medium rounded-md bg-black/60 backdrop-blur-md text-white/90 border border-white/10 shadow-sm"
-              >
-                {tag}
-              </span>
-            ))}
-            {project.tags && project.tags.length > 3 && (
-              <span className="px-2 py-1 text-[10px] font-medium rounded-md bg-black/60 backdrop-blur-md text-white/90 border border-white/10 shadow-sm">
-                +{project.tags.length - 3}
-              </span>
-            )}
-          </div>
+          {primaryCategory && (
+            <Badge
+              variant="outline"
+              className="absolute right-4 top-4 bg-background/80 text-foreground"
+            >
+              {primaryCategory}
+            </Badge>
+          )}
 
-          {/* Lens Icon - Top Left */}
           <button
             onClick={() => setIsModalOpen(true)}
-            className="absolute top-3 left-3 z-20 p-2 bg-black/50 hover:bg-black/70 backdrop-blur-md rounded-full text-white/80 hover:text-white border border-white/10 transition-all duration-300 hover:scale-110"
+            className="absolute left-4 top-4 flex size-10 items-center justify-center border border-border bg-background/80 text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
             title="View Full Image"
           >
-            <Maximize2 className="w-4 h-4" />
+            <Maximize2 className="size-4" />
           </button>
         </div>
 
-        {/* 2. CONTENT CONTAINER */}
-        <div className="p-5 flex flex-col flex-1 gap-3">
-          <div>
-            <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300">
-              {project.title}
-            </h3>
-            <p className="text-gray-400 text-sm line-clamp-2 mt-1 leading-relaxed">
-              {project.description}
-            </p>
-          </div>
+        <div className="flex flex-1 flex-col pt-6">
+          <h3 className="font-serif text-3xl font-semibold leading-tight text-foreground">
+            {project.title}
+          </h3>
+          <p className="mt-3 line-clamp-3 text-base leading-7 text-muted-foreground">
+            {project.description}
+          </p>
 
-          {/* 3. DYNAMIC FOOTER */}
-          <div className="flex gap-3 mt-auto pt-2">
+          {project.tags && project.tags.length > 0 && (
+            <div className="mt-5 flex flex-wrap gap-2">
+              {project.tags.slice(0, 3).map((tag) => (
+                <Badge key={tag} variant="outline">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          )}
+
+          <div className="mt-auto flex gap-8 pt-7">
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn(
-                  "flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-white text-sm font-medium transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-purple-500/20",
-                  "bg-gradient-to-r",
-                  gradient,
-                )}
+                className="editorial-label flex items-center gap-2 text-foreground hover:underline"
               >
-                Live Demo <ArrowUpRight className="w-4 h-4" />
+                Live Demo <ArrowUpRight className="size-3" />
               </a>
             )}
 
@@ -102,19 +87,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
               href={project.githubUrl || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              className={cn(
-                "flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium border border-white/10 hover:bg-white/5 text-gray-300 hover:text-white transition-all duration-300",
-                project.liveUrl ? "flex-1" : "w-full",
-              )}
+              className="editorial-label flex items-center gap-2 text-foreground hover:underline"
             >
-              <Github className="w-4 h-4" />
-              {project.liveUrl ? "Code" : "View Code"}
+              View Code <Code2 className="size-3" />
             </a>
           </div>
         </div>
-      </motion.div>
+      </article>
 
-      {/* Full Image Modal - Portal to Body */}
       {mounted &&
         createPortal(
           <AnimatePresence>
@@ -123,27 +103,27 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 md:p-8"
+                className="fixed inset-0 z-[9999] flex items-center justify-center bg-background/95 p-4 md:p-8"
                 onClick={() => setIsModalOpen(false)}
               >
-                <div className="relative w-full max-w-5xl max-h-[90vh] flex flex-col items-center">
+                <div className="relative flex max-h-[90vh] w-full max-w-6xl flex-col items-center">
                   <button
                     onClick={() => setIsModalOpen(false)}
-                    className="absolute -top-12 right-0 p-2 text-white/70 hover:text-white transition-colors"
+                    className="absolute -top-14 right-0 flex size-11 items-center justify-center border border-border text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
                   >
-                    <X className="w-8 h-8" />
+                    <X className="size-5" />
                   </button>
                   <motion.img
-                    initial={{ scale: 0.9 }}
+                    initial={{ scale: 0.98 }}
                     animate={{ scale: 1 }}
-                    exit={{ scale: 0.9 }}
+                    exit={{ scale: 0.98 }}
                     src={project.img}
                     alt={project.title}
-                    className="max-h-[80vh] w-auto object-contain rounded-lg shadow-2xl"
+                    className="max-h-[80vh] w-auto border border-border object-contain grayscale"
                     onClick={(e) => e.stopPropagation()}
                   />
-                  <h3 className="text-white text-xl font-medium mt-4 text-center">
-                    {project.description}
+                  <h3 className="mt-5 text-center font-serif text-3xl font-semibold text-foreground">
+                    {project.title}
                   </h3>
                 </div>
               </motion.div>

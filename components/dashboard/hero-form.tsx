@@ -110,7 +110,7 @@ export default function HeroEditor() {
   if (isLoading) {
     return (
       <div className="flex justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
+        <Loader2 className="size-8 animate-spin text-foreground" />
       </div>
     );
   }
@@ -130,8 +130,8 @@ export default function HeroEditor() {
   };
 
   return (
-    <div className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-8">
-      <h2 className="text-xl font-semibold text-white mb-6">
+    <div className="border border-border bg-card p-6 md:p-8">
+      <h2 className="mb-6 font-serif text-3xl font-semibold text-foreground">
         Edit Hero Section
       </h2>
 
@@ -149,7 +149,7 @@ export default function HeroEditor() {
               {/* Left Column */}
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-1">
+                  <label className="editorial-label mb-1 block text-muted-foreground">
                     Main Title
                   </label>
                   <Field
@@ -160,12 +160,12 @@ export default function HeroEditor() {
                   <ErrorMessage
                     name="title"
                     component="div"
-                    className="text-red-500 text-xs mt-1"
+                    className="mt-1 text-xs text-destructive"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-1">
+                  <label className="editorial-label mb-1 block text-muted-foreground">
                     Description
                   </label>
                   <Field
@@ -178,12 +178,12 @@ export default function HeroEditor() {
                   <ErrorMessage
                     name="description"
                     component="div"
-                    className="text-red-500 text-xs mt-1"
+                    className="mt-1 text-xs text-destructive"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-1">
+                  <label className="editorial-label mb-1 block text-muted-foreground">
                     Banner Image
                   </label>
                   <GalleryUpload
@@ -216,20 +216,20 @@ export default function HeroEditor() {
                        GalleryUpload takes `initialFiles`. We can construct one if it's a string.
                    */}
                   {typeof values.bannerUrl === "string" && values.bannerUrl && (
-                    <div className="mt-2 text-xs text-gray-400">
+                    <div className="mt-2 text-xs text-muted-foreground">
                       Current Banner:{" "}
                       <a
                         href={values.bannerUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-blue-400 hover:underline"
+                        className="text-foreground hover:underline"
                       >
                         View
                       </a>
                     </div>
                   )}
 
-                  <div className="text-red-500 text-xs mt-1">
+                  <div className="mt-1 text-xs text-destructive">
                     <ErrorMessage name="bannerUrl" />
                     {/* Explicitly handle object errors if necessary, but string conversion is safer */}
                     {typeof errors.bannerUrl === "string"
@@ -239,7 +239,7 @@ export default function HeroEditor() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-1">
+                  <label className="editorial-label mb-1 block text-muted-foreground">
                     Resume URL (Drive/Dropbox/etc)
                   </label>
                   <Field
@@ -250,7 +250,7 @@ export default function HeroEditor() {
                   <ErrorMessage
                     name="resumeUrl"
                     component="div"
-                    className="text-red-500 text-xs mt-1"
+                    className="mt-1 text-xs text-destructive"
                   />
                 </div>
               </div>
@@ -258,7 +258,7 @@ export default function HeroEditor() {
               {/* Right Column */}
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">
+                  <label className="editorial-label mb-2 block text-muted-foreground">
                     Typewriter Effect Words
                   </label>
                   <FieldArray name="typewriterWords">
@@ -274,18 +274,18 @@ export default function HeroEditor() {
                             <button
                               type="button"
                               onClick={() => remove(index)}
-                              className="p-2 text-red-400 hover:text-red-300 hover:bg-white/5 rounded-lg transition-colors"
+                              className="border border-border p-2 text-muted-foreground transition-colors hover:border-destructive hover:text-destructive"
                             >
-                              <Trash2 className="w-4 h-4" />
+                              <Trash2 className="size-4" />
                             </button>
                           </div>
                         ))}
                         <button
                           type="button"
                           onClick={() => push("")}
-                          className="text-xs text-purple-400 hover:text-purple-300 flex items-center gap-1 mt-1"
+                            className="editorial-label mt-1 flex items-center gap-1 text-muted-foreground hover:text-foreground"
                         >
-                          <Plus className="w-3 h-3" /> Add Word
+                          <Plus className="size-3" /> Add Word
                         </button>
                       </div>
                     )}
@@ -293,12 +293,12 @@ export default function HeroEditor() {
                   <ErrorMessage
                     name="typewriterWords"
                     component="div"
-                    className="text-red-500 text-xs mt-1"
+                    className="mt-1 text-xs text-destructive"
                   />
                 </div>
 
-                <div className="pt-4 border-t border-white/10">
-                  <h4 className="text-sm font-medium text-gray-300 mb-3">
+                <div className="border-t border-border pt-4">
+                  <h4 className="editorial-label mb-3 text-muted-foreground">
                     Social Links
                   </h4>
                   <div className="space-y-3">
@@ -311,7 +311,7 @@ export default function HeroEditor() {
                       <ErrorMessage
                         name="socialLinks.github"
                         component="div"
-                        className="text-red-500 text-xs mt-1"
+                        className="mt-1 text-xs text-destructive"
                       />
                     </div>
                     <div>
@@ -323,7 +323,7 @@ export default function HeroEditor() {
                       <ErrorMessage
                         name="socialLinks.linkedin"
                         component="div"
-                        className="text-red-500 text-xs mt-1"
+                        className="mt-1 text-xs text-destructive"
                       />
                     </div>
                     <div>
@@ -335,7 +335,7 @@ export default function HeroEditor() {
                       <ErrorMessage
                         name="socialLinks.instagram"
                         component="div"
-                        className="text-red-500 text-xs mt-1"
+                        className="mt-1 text-xs text-destructive"
                       />
                     </div>
                     <div>
@@ -347,7 +347,7 @@ export default function HeroEditor() {
                       <ErrorMessage
                         name="socialLinks.email"
                         component="div"
-                        className="text-red-500 text-xs mt-1"
+                        className="mt-1 text-xs text-destructive"
                       />
                     </div>
                   </div>
@@ -355,16 +355,16 @@ export default function HeroEditor() {
               </div>
             </div>
 
-            <div className="flex justify-end pt-6 border-t border-white/10">
+            <div className="flex justify-end border-t border-border pt-6">
               <Button
                 type="submit"
                 disabled={isSubmitting || updateHeroMutation.isPending}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8"
+                className="editorial-button"
               >
                 {isSubmitting || updateHeroMutation.isPending ? (
-                  <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                  <Loader2 data-icon="inline-start" className="animate-spin" />
                 ) : (
-                  <Save className="w-4 h-4 mr-2" />
+                  <Save data-icon="inline-start" />
                 )}
                 Save Changes
               </Button>

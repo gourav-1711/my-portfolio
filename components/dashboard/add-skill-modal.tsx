@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { motion, AnimatePresence } from "framer-motion";
 import GalleryUpload from "@/components/gallery-upload";
-import { Loader2, Sparkles, X } from "lucide-react";
+import { Code2, Loader2, X } from "lucide-react";
 import { useSkillStore } from "@/lib/store";
 import { Skill } from "@/lib/types";
 
@@ -114,7 +114,7 @@ export function AddSkillModal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-start justify-center bg-black/70 backdrop-blur-sm px-4 py-8 overflow-y-auto"
+          className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-background/90 px-4 py-8"
           onClick={onClose}
         >
           <motion.div
@@ -122,30 +122,30 @@ export function AddSkillModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-[#111] border border-white/10 rounded-3xl p-6 md:p-8 w-full max-w-xl shadow-2xl"
+            className="w-full max-w-xl border border-border bg-card p-6 shadow-none md:p-8"
           >
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-white" />
+                <div className="flex size-10 items-center justify-center border border-border bg-background">
+                  <Code2 className="size-5 text-foreground" />
                 </div>
-                <h2 className="text-xl font-bold text-white">
+                <h2 className="font-serif text-2xl font-semibold text-foreground">
                   {initialData ? "Edit Skill" : "Add Skill"}
                 </h2>
               </div>
               <button
                 onClick={onClose}
-                className="p-2 hover:bg-white/10 rounded-xl transition-colors"
+                className="border border-border p-2 transition-colors hover:bg-primary hover:text-primary-foreground"
               >
-                <X className="w-5 h-5 text-gray-400" />
+                <X className="size-5" />
               </button>
             </div>
 
             <form onSubmit={formik.handleSubmit} className="space-y-4">
               {/* Name */}
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1.5">
+                <label className="editorial-label mb-1.5 block text-muted-foreground">
                   Skill Name
                 </label>
                 <input
@@ -158,7 +158,7 @@ export function AddSkillModal({
                   className="modal-input"
                 />
                 {formik.touched.name && formik.errors.name && (
-                  <p className="mt-1 text-xs text-red-400">
+                  <p className="mt-1 text-xs text-destructive">
                     {formik.errors.name}
                   </p>
                 )}
@@ -166,7 +166,7 @@ export function AddSkillModal({
 
               {/* Category */}
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1.5">
+                <label className="editorial-label mb-1.5 block text-muted-foreground">
                   Category
                 </label>
                 <select
@@ -177,13 +177,13 @@ export function AddSkillModal({
                   className="modal-input appearance-none"
                 >
                   {categories.map((cat) => (
-                    <option key={cat} value={cat} className="bg-neutral-900">
+                    <option key={cat} value={cat} className="bg-background">
                       {cat}
                     </option>
                   ))}
                 </select>
                 {formik.touched.category && formik.errors.category && (
-                  <p className="mt-1 text-xs text-red-400">
+                  <p className="mt-1 text-xs text-destructive">
                     {formik.errors.category}
                   </p>
                 )}
@@ -191,7 +191,7 @@ export function AddSkillModal({
 
               {/* Image Upload */}
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1.5">
+                <label className="editorial-label mb-1.5 block text-muted-foreground">
                   Icon / Image
                 </label>
                 <GalleryUpload
@@ -229,7 +229,7 @@ export function AddSkillModal({
                   }}
                 />
                 {formik.touched.img && formik.errors.img && (
-                  <p className="mt-1 text-xs text-red-400">
+                  <p className="mt-1 text-xs text-destructive">
                     {String(formik.errors.img)}
                   </p>
                 )}
@@ -237,7 +237,7 @@ export function AddSkillModal({
 
               {/* Description */}
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1.5">
+                <label className="editorial-label mb-1.5 block text-muted-foreground">
                   Description
                 </label>
                 <textarea
@@ -250,7 +250,7 @@ export function AddSkillModal({
                   className="modal-input resize-none"
                 />
                 {formik.touched.description && formik.errors.description && (
-                  <p className="mt-1 text-xs text-red-400">
+                  <p className="mt-1 text-xs text-destructive">
                     {formik.errors.description}
                   </p>
                 )}
@@ -258,7 +258,7 @@ export function AddSkillModal({
 
               {/* Proficiency */}
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1.5">
+                <label className="editorial-label mb-1.5 block text-muted-foreground">
                   Proficiency ({formik.values.proficiency}%)
                 </label>
                 <input
@@ -268,15 +268,15 @@ export function AddSkillModal({
                   max={100}
                   value={formik.values.proficiency}
                   onChange={formik.handleChange}
-                  className="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer accent-emerald-500"
+                  className="h-2 w-full cursor-pointer appearance-none bg-secondary accent-white"
                 />
-                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                <div className="mt-1 flex justify-between text-xs text-muted-foreground">
                   <span>0%</span>
                   <span>50%</span>
                   <span>100%</span>
                 </div>
                 {formik.touched.proficiency && formik.errors.proficiency && (
-                  <p className="mt-1 text-xs text-red-400">
+                  <p className="mt-1 text-xs text-destructive">
                     {String(formik.errors.proficiency)}
                   </p>
                 )}
@@ -286,11 +286,11 @@ export function AddSkillModal({
               <button
                 type="submit"
                 disabled={formik.isSubmitting}
-                className="w-full py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-emerald-500/25 disabled:opacity-50 flex items-center justify-center gap-2 mt-2"
+                className="editorial-button mt-2 flex w-full items-center justify-center gap-2 border border-primary bg-primary py-3 text-primary-foreground transition-colors hover:bg-background hover:text-foreground disabled:opacity-50"
               >
                 {formik.isSubmitting ? (
                   <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <Loader2 className="size-5 animate-spin" />
                     Adding...
                   </>
                 ) : initialData ? (

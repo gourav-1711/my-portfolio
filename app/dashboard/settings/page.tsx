@@ -31,14 +31,16 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold text-white mb-8">Settings</h1>
+    <div className="mx-auto max-w-4xl p-8">
+      <h1 className="mb-8 font-serif text-5xl font-semibold text-foreground">
+        Settings
+      </h1>
 
-      <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
-        <h2 className="text-xl font-semibold text-white mb-4">
+      <div className="border border-border bg-card p-6">
+        <h2 className="mb-4 font-serif text-3xl font-semibold text-foreground">
           Session Management
         </h2>
-        <p className="text-gray-400 mb-6">
+        <p className="mb-6 text-muted-foreground">
           Your admin session is valid for 10 days. You can refresh it manually
           here to extend your access without logging in again.
         </p>
@@ -46,16 +48,16 @@ export default function SettingsPage() {
         <Button
           onClick={handleRefreshSession}
           disabled={isRefreshing}
-          className="bg-white text-black hover:bg-gray-200"
+          className="editorial-button"
         >
           {isRefreshing ? (
             <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              <Loader2 data-icon="inline-start" className="animate-spin" />
               Refreshing...
             </>
           ) : (
             <>
-              <RefreshCw className="mr-2 h-4 w-4" />
+              <RefreshCw data-icon="inline-start" />
               Restore Session Cookie
             </>
           )}

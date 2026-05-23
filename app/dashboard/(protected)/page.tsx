@@ -12,7 +12,6 @@ import {
   Search,
   Settings,
   Pencil,
-  ArrowUpRight,
   Github,
   ExternalLink,
 } from "lucide-react";
@@ -87,29 +86,33 @@ export default function DashboardPage() {
     <button
       onClick={() => setActiveTab(id)}
       className={cn(
-        "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all",
+        "editorial-label flex items-center gap-2 border px-4 py-3 transition-all",
         activeTab === id
-          ? "bg-purple-600/20 text-purple-400 border border-purple-500/30"
-          : "text-gray-400 hover:text-white hover:bg-white/5",
+          ? "border-primary bg-primary text-primary-foreground"
+          : "border-border text-muted-foreground hover:bg-secondary hover:text-foreground",
       )}
     >
-      <Icon className="w-4 h-4" />
+      <Icon className="size-4" />
       {label}
     </button>
   );
 
   return (
-    <div className="space-y-8">
+    <div className="mx-auto flex max-w-7xl flex-col gap-8">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-white mb-2">Dashboard</h1>
-          <p className="text-gray-400">Manage your portfolio content.</p>
+          <h1 className="font-serif text-5xl font-semibold text-foreground">
+            Dashboard
+          </h1>
+          <p className="mt-3 text-muted-foreground">
+            Manage your portfolio content.
+          </p>
         </div>
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex flex-wrap gap-2 border-b border-white/10 pb-4">
+      <div className="flex flex-wrap gap-3 border-b border-border pb-6">
         <TabButton id="projects" label="Projects" icon={LayoutGrid} />
         <TabButton id="skills" label="Skills" icon={List} />
         <TabButton id="categories" label="Categories" icon={Search} />
@@ -128,51 +131,40 @@ export default function DashboardPage() {
                   setEditingProject(null);
                   setIsProjectModalOpen(true);
                 }}
-                className="bg-purple-600 hover:bg-purple-700 text-white"
+                className="editorial-button"
               >
-                <Plus className="w-4 h-4 mr-2" /> Add Project
+                <Plus data-icon="inline-start" /> Add Project
               </Button>
             </div>
 
             {isLoadingProjects ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {[1, 2, 3].map((i) => (
                   <div
                     key={i}
-                    className="h-40 bg-white/5 rounded-xl animate-pulse"
+                    className="h-40 animate-pulse border border-border bg-card"
                   />
                 ))}
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {projects?.map((project) => {
-                  const gradient =
-                    project.gradient || "from-purple-500 to-pink-500";
                   return (
                     <div
                       key={project.id}
-                      className="group relative flex flex-col bg-[#0a0a0a] rounded-2xl border border-white/10 overflow-hidden hover:border-purple-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/5"
+                      className="group relative flex flex-col overflow-hidden border border-border bg-card transition-colors hover:bg-secondary"
                     >
-                      {/* Gradient Accent Bar */}
-                      <div
-                        className={cn("h-1 w-full bg-gradient-to-r", gradient)}
-                      />
-
                       {/* Image Thumbnail */}
-                      <div className="relative w-full aspect-[16/10] bg-gray-900/50 overflow-hidden">
-                        <div
-                          className="absolute inset-0 bg-cover bg-center blur-xl opacity-30 scale-110"
-                          style={{ backgroundImage: `url(${project.img})` }}
-                        />
+                      <div className="relative aspect-[16/10] w-full overflow-hidden bg-background">
                         <img
                           src={project.img}
                           alt={project.title}
-                          className="relative z-10 w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                          className="relative z-10 h-full w-full object-cover grayscale transition-transform duration-500 group-hover:scale-105"
                         />
 
                         {/* Category Badge */}
-                        <div className="absolute top-2.5 left-2.5 z-20">
-                          <span className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md text-white/90 border border-white/10">
+                        <div className="absolute left-2.5 top-2.5 z-20">
+                          <span className="editorial-label border border-border bg-background/80 px-2.5 py-1 text-foreground">
                             {Array.isArray(project.category)
                               ? project.category[0]
                               : project.category}
@@ -186,10 +178,10 @@ export default function DashboardPage() {
                               href={project.liveUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="p-1.5 bg-black/50 hover:bg-purple-500/80 backdrop-blur-md rounded-lg text-white/80 hover:text-white border border-white/10 transition-all duration-200"
+                              className="border border-border bg-background/80 p-1.5 text-foreground/80 transition-colors hover:bg-primary hover:text-primary-foreground"
                               title="Live Demo"
                             >
-                              <ExternalLink className="w-3.5 h-3.5" />
+                              <ExternalLink className="size-3.5" />
                             </a>
                           )}
                           {project.githubUrl && (
@@ -197,40 +189,40 @@ export default function DashboardPage() {
                               href={project.githubUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="p-1.5 bg-black/50 hover:bg-white/20 backdrop-blur-md rounded-lg text-white/80 hover:text-white border border-white/10 transition-all duration-200"
+                              className="border border-border bg-background/80 p-1.5 text-foreground/80 transition-colors hover:bg-primary hover:text-primary-foreground"
                               title="GitHub"
                             >
-                              <Github className="w-3.5 h-3.5" />
+                              <Github className="size-3.5" />
                             </a>
                           )}
                         </div>
                       </div>
 
                       {/* Content */}
-                      <div className="p-4 flex flex-col flex-1 gap-2.5">
-                        <h3 className="font-semibold text-white text-base line-clamp-1 group-hover:text-purple-400 transition-colors duration-300">
+                      <div className="flex flex-1 flex-col gap-3 p-5">
+                        <h3 className="line-clamp-1 font-serif text-2xl font-semibold text-foreground">
                           {project.title}
                         </h3>
 
                         {project.description && (
-                          <p className="text-gray-500 text-xs line-clamp-2 leading-relaxed">
+                          <p className="line-clamp-2 text-sm leading-6 text-muted-foreground">
                             {project.description}
                           </p>
                         )}
 
                         {/* Tags */}
                         {project.tags && project.tags.length > 0 && (
-                          <div className="flex flex-wrap gap-1.5 mt-auto pt-1">
+                          <div className="mt-auto flex flex-wrap gap-1.5 pt-1">
                             {project.tags.slice(0, 3).map((tag, i) => (
                               <span
                                 key={i}
-                                className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-white/5 text-gray-400 border border-white/5"
+                                className="editorial-label border border-border px-2 py-1 text-muted-foreground"
                               >
                                 {tag}
                               </span>
                             ))}
                             {project.tags.length > 3 && (
-                              <span className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-white/5 text-gray-500 border border-white/5">
+                              <span className="editorial-label border border-border px-2 py-1 text-muted-foreground">
                                 +{project.tags.length - 3}
                               </span>
                             )}
@@ -239,16 +231,16 @@ export default function DashboardPage() {
                       </div>
 
                       {/* Hover Action Bar */}
-                      <div className="flex items-center justify-end gap-1.5 px-4 py-2.5 border-t border-white/5 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white/[0.02]">
+                      <div className="flex items-center justify-end gap-2 border-t border-border px-4 py-3">
                         <button
                           onClick={() => {
                             setEditingProject(project);
                             setIsProjectModalOpen(true);
                           }}
-                          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 rounded-lg transition-colors"
+                          className="editorial-label flex items-center gap-1.5 border border-border px-3 py-2 text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
                           title="Edit Project"
                         >
-                          <Pencil className="w-3 h-3" />
+                          <Pencil className="size-3" />
                           Edit
                         </button>
                         <button
@@ -257,10 +249,10 @@ export default function DashboardPage() {
                               deleteProjectMutation.mutate(project.id);
                             }
                           }}
-                          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-lg transition-colors"
+                          className="editorial-label flex items-center gap-1.5 border border-border px-3 py-2 text-muted-foreground transition-colors hover:border-destructive hover:text-destructive"
                           title="Delete Project"
                         >
-                          <Trash2 className="w-3 h-3" />
+                          <Trash2 className="size-3" />
                           Delete
                         </button>
                       </div>
@@ -268,7 +260,7 @@ export default function DashboardPage() {
                   );
                 })}
                 {projects?.length === 0 && (
-                  <div className="col-span-full text-center py-20 text-gray-500">
+                  <div className="col-span-full py-20 text-center text-muted-foreground">
                     No projects found. Add your first one!
                   </div>
                 )}
@@ -286,55 +278,57 @@ export default function DashboardPage() {
                   setEditingSkill(null);
                   setIsSkillModalOpen(true);
                 }}
-                className="bg-purple-600 hover:bg-purple-700 text-white"
+                className="editorial-button"
               >
-                <Plus className="w-4 h-4 mr-2" /> Add Skill
+                <Plus data-icon="inline-start" /> Add Skill
               </Button>
             </div>
 
             {isLoadingSkills ? (
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
                 {[1, 2, 3, 4].map((i) => (
                   <div
                     key={i}
-                    className="h-24 bg-white/5 rounded-xl animate-pulse"
+                    className="h-24 animate-pulse border border-border bg-card"
                   />
                 ))}
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
                 {skills?.map((skill) => (
                   <div
                     key={skill.id}
-                    className="bg-[#0a0a0a] border border-white/10 rounded-xl p-4 flex items-center justify-between group"
+                    className="group flex items-center justify-between border border-border bg-card p-5 transition-colors hover:bg-secondary"
                   >
                     <div className="flex items-center gap-3">
                       {skill.img && (
-                        <div className="w-10 h-10 bg-white/5 rounded-lg p-2 flex items-center justify-center">
+                        <div className="flex size-10 items-center justify-center border border-border bg-background p-2">
                           <img
                             src={skill.img}
                             alt={skill.name}
-                            className="w-full h-full object-contain"
+                            className="h-full w-full object-contain brightness-0 invert grayscale"
                           />
                         </div>
                       )}
                       <div>
-                        <h4 className="font-medium text-white">{skill.name}</h4>
-                        <p className="text-sm text-gray-500">
+                        <h4 className="font-medium text-foreground">
+                          {skill.name}
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
                           {skill.proficiency}%
                         </p>
                       </div>
                     </div>
-                    <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                    <div className="flex gap-2 opacity-0 transition-all group-hover:opacity-100">
                       <button
                         onClick={() => {
                           setEditingSkill(skill);
                           setIsSkillModalOpen(true);
                         }}
-                        className="text-gray-400 hover:text-white transition-colors"
+                        className="text-muted-foreground transition-colors hover:text-foreground"
                         title="Edit Skill"
                       >
-                        <Pencil className="w-4 h-4" />
+                        <Pencil className="size-4" />
                       </button>
                       <button
                         onClick={() => {
@@ -342,16 +336,16 @@ export default function DashboardPage() {
                             deleteSkillMutation.mutate(skill.id);
                           }
                         }}
-                        className="text-gray-600 hover:text-red-500 transition-colors"
+                        className="text-muted-foreground transition-colors hover:text-destructive"
                         title="Delete Skill"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <Trash2 className="size-4" />
                       </button>
                     </div>
                   </div>
                 ))}
                 {skills?.length === 0 && (
-                  <div className="col-span-full text-center py-20 text-gray-500">
+                  <div className="col-span-full py-20 text-center text-muted-foreground">
                     No skills found.
                   </div>
                 )}

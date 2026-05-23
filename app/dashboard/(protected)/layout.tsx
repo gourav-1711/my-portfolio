@@ -25,11 +25,15 @@ export default function DashboardLayout({
 
   if (isChecking || !isAuthenticated || !isPasskeyVerified) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a] p-2">
-        <div className="w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen flex items-center justify-center bg-background p-2">
+        <div className="size-8 animate-spin border border-border border-t-foreground" />
       </div>
     );
   }
 
-  return <div className="p-4">{children}</div>;
+  return (
+    <div className="min-h-screen bg-background p-4 text-foreground md:p-8">
+      {children}
+    </div>
+  );
 }

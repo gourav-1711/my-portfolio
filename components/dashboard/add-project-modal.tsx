@@ -44,11 +44,11 @@ const projectSchema = Yup.object().shape({
 });
 
 const gradients = [
-  { name: "Cosmic Fusion", class: "from-purple-500/20 to-blue-500/20" },
-  { name: "Oceanic Teal", class: "from-emerald-500/20 to-teal-500/20" },
-  { name: "Sunset Glow", class: "from-orange-500/20 to-red-500/20" },
-  { name: "Rose Petal", class: "from-pink-500/20 to-rose-500/20" },
-  { name: "Azure Sky", class: "from-cyan-500/20 to-blue-500/20" },
+  { name: "Graphite", class: "bg-[#1a1a1a]" },
+  { name: "Charcoal", class: "bg-[#242424]" },
+  { name: "Slate", class: "bg-[#2f2f2f]" },
+  { name: "Ash", class: "bg-[#3a3a3a]" },
+  { name: "Ink", class: "bg-[#0e0e0e]" },
 ];
 
 export function AddProjectModal({
@@ -80,26 +80,26 @@ export function AddProjectModal({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4"
       >
         <motion.div
           initial={{ scale: 0.95, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.95, opacity: 0, y: 20 }}
-          className="bg-[#0f0f0f] border border-white/10 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative"
+          className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto border border-border bg-card shadow-none"
         >
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-2 bg-white/5 hover:bg-white/10 rounded-full text-gray-400 hover:text-white transition-colors z-10"
+            className="absolute right-4 top-4 z-10 border border-border p-2 text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
           >
-            <X className="w-5 h-5" />
+            <X className="size-5" />
           </button>
 
           <div className="p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-white mb-2">
+            <h2 className="mb-2 font-serif text-3xl font-semibold text-foreground">
               {initialData ? "Edit Project" : "Add New Project"}
             </h2>
-            <p className="text-gray-400 text-sm mb-6">
+            <p className="mb-6 text-sm text-muted-foreground">
               Showcase your latest work to the world.
             </p>
 
@@ -178,7 +178,7 @@ export function AddProjectModal({
                   {/* Title & Category Row */}
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-1">
+                      <label className="editorial-label mb-1 block text-muted-foreground">
                         Project Title
                       </label>
                       <Field
@@ -189,11 +189,11 @@ export function AddProjectModal({
                       <ErrorMessage
                         name="title"
                         component="div"
-                        className="text-red-500 text-xs mt-1"
+                        className="mt-1 text-xs text-destructive"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-1">
+                      <label className="editorial-label mb-1 block text-muted-foreground">
                         Category
                       </label>
                       <MultiSelect
@@ -211,14 +211,14 @@ export function AddProjectModal({
                       <ErrorMessage
                         name="category"
                         component="div"
-                        className="text-red-500 text-xs mt-1"
+                        className="mt-1 text-xs text-destructive"
                       />
                     </div>
                   </div>
 
                   {/* Description */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-1">
+                    <label className="editorial-label mb-1 block text-muted-foreground">
                       Description
                     </label>
                     <Field
@@ -231,13 +231,13 @@ export function AddProjectModal({
                     <ErrorMessage
                       name="description"
                       component="div"
-                      className="text-red-500 text-xs mt-1"
+                      className="mt-1 text-xs text-destructive"
                     />
                   </div>
 
                   {/* Image Upload */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-1">
+                    <label className="editorial-label mb-1 block text-muted-foreground">
                       Project Image (Max 10MB)
                     </label>
                     <GalleryUpload
@@ -283,16 +283,16 @@ export function AddProjectModal({
                     <ErrorMessage
                       name="img"
                       component="div"
-                      className="text-red-500 text-xs mt-1"
+                      className="mt-1 text-xs text-destructive"
                     />
                   </div>
 
                   {/* URLs Row */}
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-1">
+                      <label className="editorial-label mb-1 block text-muted-foreground">
                         Live Demo URL{" "}
-                        <span className="text-gray-600">(Optional)</span>
+                        <span className="text-muted-foreground">(Optional)</span>
                       </label>
                       <Field
                         name="liveUrl"
@@ -302,13 +302,13 @@ export function AddProjectModal({
                       <ErrorMessage
                         name="liveUrl"
                         component="div"
-                        className="text-red-500 text-xs mt-1"
+                        className="mt-1 text-xs text-destructive"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-1">
+                      <label className="editorial-label mb-1 block text-muted-foreground">
                         GitHub URL{" "}
-                        <span className="text-gray-600">(Optional)</span>
+                        <span className="text-muted-foreground">(Optional)</span>
                       </label>
                       <Field
                         name="githubUrl"
@@ -318,14 +318,14 @@ export function AddProjectModal({
                       <ErrorMessage
                         name="githubUrl"
                         component="div"
-                        className="text-red-500 text-xs mt-1"
+                        className="mt-1 text-xs text-destructive"
                       />
                     </div>
                   </div>
 
                   {/* Tags */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">
+                    <label className="editorial-label mb-2 block text-muted-foreground">
                       Tech Stack Tags
                     </label>
                     <FieldArray name="tags">
@@ -335,16 +335,16 @@ export function AddProjectModal({
                             <div key={index} className="relative group">
                               <Field
                                 name={`tags.${index}`}
-                                className="w-24 px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-white focus:border-purple-500 focus:outline-none"
+                                className="w-24 border border-border bg-background px-3 py-2 text-sm text-foreground focus:border-primary focus:outline-none"
                                 placeholder="Tag"
                               />
                               {values.tags.length > 1 && (
                                 <button
                                   type="button"
                                   onClick={() => remove(index)}
-                                  className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                                  className="absolute -right-1 -top-1 border border-destructive bg-background p-0.5 text-destructive opacity-0 transition-opacity group-hover:opacity-100"
                                 >
-                                  <X className="w-3 h-3" />
+                                  <X className="size-3" />
                                 </button>
                               )}
                             </div>
@@ -352,9 +352,9 @@ export function AddProjectModal({
                           <button
                             type="button"
                             onClick={() => push("")}
-                            className="px-3 py-1.5 border border-dashed border-white/20 rounded-lg text-sm text-gray-400 hover:text-white hover:border-white/40 transition-colors flex items-center gap-1"
+                            className="flex items-center gap-1 border border-dashed border-border px-3 py-2 text-sm text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
                           >
-                            <Plus className="w-3 h-3" /> Add
+                            <Plus className="size-3" /> Add
                           </button>
                         </div>
                       )}
@@ -362,36 +362,36 @@ export function AddProjectModal({
                     <ErrorMessage
                       name="tags"
                       component="div"
-                      className="text-red-500 text-xs mt-1"
+                      className="mt-1 text-xs text-destructive"
                     />
                   </div>
 
                   {/* Gradient Picker */}
                   <div className="relative">
-                    <label className="block text-sm font-medium text-gray-400 mb-2">
-                      Card Gradient Theme
+                    <label className="editorial-label mb-2 block text-muted-foreground">
+                      Card Tone Metadata
                     </label>
 
                     <button
                       type="button"
                       onClick={() => setIsGradientOpen(!isGradientOpen)}
-                      className="w-full flex items-center justify-between bg-[#0f0f0f] border border-white/10 rounded-xl px-4 py-3 text-left hover:border-white/20 transition-colors"
+                      className="flex w-full items-center justify-between border border-border bg-background px-4 py-3 text-left transition-colors hover:border-primary"
                     >
                       <div className="flex items-center gap-3">
                         <div
                           className={clsx(
-                            "w-6 h-6 rounded-full bg-gradient-to-br",
+                            "size-6 border border-border bg-secondary",
                             values.gradient,
                           )}
                         />
-                        <span className="text-white text-sm">
+                        <span className="text-sm text-foreground">
                           {gradients.find((g) => g.class === values.gradient)
                             ?.name || "Select Gradient"}
                         </span>
                       </div>
                       <ChevronDown
                         className={clsx(
-                          "w-4 h-4 text-gray-400 transition-transform",
+                          "size-4 text-muted-foreground transition-transform",
                           isGradientOpen && "rotate-180",
                         )}
                       />
@@ -403,7 +403,7 @@ export function AddProjectModal({
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
-                          className="absolute z-50 mt-2 w-full bg-[#1a1a1a] border border-white/10 rounded-xl shadow-xl overflow-hidden"
+                          className="absolute z-50 mt-2 w-full overflow-hidden border border-border bg-card shadow-none"
                         >
                           {gradients.map((grad) => (
                             <button
@@ -413,11 +413,11 @@ export function AddProjectModal({
                                 setFieldValue("gradient", grad.class);
                                 setIsGradientOpen(false);
                               }}
-                              className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-colors"
+                              className="flex w-full items-center gap-3 px-4 py-3 transition-colors hover:bg-secondary"
                             >
                               <div
                                 className={clsx(
-                                  "w-6 h-6 rounded-full bg-gradient-to-br",
+                                  "size-6 border border-border bg-secondary",
                                   grad.class,
                                 )}
                               />
@@ -425,8 +425,8 @@ export function AddProjectModal({
                                 className={clsx(
                                   "text-sm",
                                   values.gradient === grad.class
-                                    ? "text-white font-medium"
-                                    : "text-gray-400",
+                                    ? "font-medium text-foreground"
+                                    : "text-muted-foreground",
                                 )}
                               >
                                 {grad.name}
@@ -439,7 +439,7 @@ export function AddProjectModal({
                   </div>
 
                   {submissionError && (
-                    <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500 text-sm">
+                    <div className="border border-destructive/50 bg-background p-3 text-sm text-destructive">
                       {submissionError}
                     </div>
                   )}
@@ -448,11 +448,11 @@ export function AddProjectModal({
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="bg-white text-black hover:bg-gray-200"
+                      className="editorial-button"
                     >
                       {isSubmitting ? (
                         <>
-                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          <Loader2 data-icon="inline-start" className="animate-spin" />
                           Saving...
                         </>
                       ) : initialData ? (

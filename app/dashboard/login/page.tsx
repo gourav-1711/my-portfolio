@@ -81,28 +81,24 @@ export default function LoginPage() {
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a] relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[128px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[128px]" />
-      </div>
-
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background">
       {/* Login Card */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="relative z-10 w-full max-w-md mx-4"
+        className="relative z-10 mx-4 w-full max-w-md"
       >
-        <div className="bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl">
+        <div className="border border-border bg-card p-8 shadow-none md:p-10">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/25">
-              <Shield className="w-8 h-8 text-white" />
+            <div className="mx-auto mb-4 flex size-16 items-center justify-center border border-border bg-background">
+              <Shield className="size-8 text-foreground" />
             </div>
-            <h1 className="text-2xl font-bold text-white mb-2">Admin Login</h1>
-            <p className="text-gray-400 text-sm">
+            <h1 className="mb-2 font-serif text-3xl font-semibold text-foreground">
+              Admin Login
+            </h1>
+            <p className="text-sm text-muted-foreground">
               Enter your credentials to access the dashboard
             </p>
           </div>
@@ -114,7 +110,7 @@ export default function LoginPage() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
-                className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm text-center"
+                className="mb-4 border border-destructive/50 bg-background p-3 text-center text-sm text-destructive"
               >
                 {loginError}
               </motion.div>
@@ -122,14 +118,14 @@ export default function LoginPage() {
           </AnimatePresence>
 
           {/* Form */}
-          <form onSubmit={loginFormik.handleSubmit} className="space-y-5">
+          <form onSubmit={loginFormik.handleSubmit} className="flex flex-col gap-5">
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="editorial-label mb-2 block text-muted-foreground">
                 Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                <Mail className="absolute left-0 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
                 <input
                   type="email"
                   name="email"
@@ -137,15 +133,15 @@ export default function LoginPage() {
                   value={loginFormik.values.email}
                   onChange={loginFormik.handleChange}
                   onBlur={loginFormik.handleBlur}
-                  className={`w-full pl-12 pr-4 py-3.5 bg-white/5 border rounded-xl text-white placeholder:text-gray-600 focus:outline-none focus:ring-2 transition-all ${
+                  className={`w-full border-0 border-b bg-transparent py-3.5 pl-8 pr-4 text-foreground placeholder:text-muted-foreground focus:outline-none ${
                     loginFormik.touched.email && loginFormik.errors.email
-                      ? "border-red-500/50 focus:ring-red-500/30"
-                      : "border-white/10 focus:ring-purple-500/30 focus:border-purple-500/50"
+                      ? "border-destructive"
+                      : "border-border focus:border-primary"
                   }`}
                 />
               </div>
               {loginFormik.touched.email && loginFormik.errors.email && (
-                <p className="mt-1.5 text-xs text-red-400">
+                <p className="mt-1.5 text-xs text-destructive">
                   {loginFormik.errors.email}
                 </p>
               )}
@@ -153,11 +149,11 @@ export default function LoginPage() {
 
             {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="editorial-label mb-2 block text-muted-foreground">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                <Lock className="absolute left-0 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
@@ -165,26 +161,26 @@ export default function LoginPage() {
                   value={loginFormik.values.password}
                   onChange={loginFormik.handleChange}
                   onBlur={loginFormik.handleBlur}
-                  className={`w-full pl-12 pr-12 py-3.5 bg-white/5 border rounded-xl text-white placeholder:text-gray-600 focus:outline-none focus:ring-2 transition-all ${
+                  className={`w-full border-0 border-b bg-transparent py-3.5 pl-8 pr-12 text-foreground placeholder:text-muted-foreground focus:outline-none ${
                     loginFormik.touched.password && loginFormik.errors.password
-                      ? "border-red-500/50 focus:ring-red-500/30"
-                      : "border-white/10 focus:ring-purple-500/30 focus:border-purple-500/50"
+                      ? "border-destructive"
+                      : "border-border focus:border-primary"
                   }`}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {showPassword ? (
-                    <EyeOff className="w-5 h-5" />
+                    <EyeOff className="size-5" />
                   ) : (
-                    <Eye className="w-5 h-5" />
+                    <Eye className="size-5" />
                   )}
                 </button>
               </div>
               {loginFormik.touched.password && loginFormik.errors.password && (
-                <p className="mt-1.5 text-xs text-red-400">
+                <p className="mt-1.5 text-xs text-destructive">
                   {loginFormik.errors.password}
                 </p>
               )}
@@ -194,11 +190,11 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loginFormik.isSubmitting}
-              className="w-full py-3.5 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="editorial-button flex w-full items-center justify-center gap-2 border border-primary bg-primary py-3.5 text-primary-foreground transition-colors hover:bg-background hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loginFormik.isSubmitting ? (
                 <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <Loader2 className="size-5 animate-spin" />
                   Verifying...
                 </>
               ) : (
@@ -216,7 +212,7 @@ export default function LoginPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 px-4"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -228,17 +224,17 @@ export default function LoginPage() {
               }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ duration: 0.3 }}
-              className="bg-[#111] border border-white/10 rounded-3xl p-8 w-full max-w-sm shadow-2xl"
+              className="w-full max-w-sm border border-border bg-card p-8 shadow-none"
             >
               {/* Header */}
               <div className="text-center mb-6">
-                <div className="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/25">
-                  <Lock className="w-7 h-7 text-white" />
+                <div className="mx-auto mb-4 flex size-14 items-center justify-center border border-border bg-background">
+                  <Lock className="size-7 text-foreground" />
                 </div>
-                <h2 className="text-xl font-bold text-white mb-1">
+                <h2 className="mb-1 font-serif text-2xl font-semibold text-foreground">
                   Passkey Verification
                 </h2>
-                <p className="text-gray-400 text-sm">
+                <p className="text-sm text-muted-foreground">
                   Enter your admin passkey to continue
                 </p>
               </div>
@@ -250,7 +246,7 @@ export default function LoginPage() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm text-center"
+                    className="mb-4 border border-destructive/50 bg-background p-3 text-center text-sm text-destructive"
                   >
                     {passkeyError}
                   </motion.div>
@@ -268,16 +264,16 @@ export default function LoginPage() {
                     onChange={passkeyFormik.handleChange}
                     onBlur={passkeyFormik.handleBlur}
                     autoFocus
-                    className={`w-full px-4 py-3.5 bg-white/5 border rounded-xl text-white text-center text-lg tracking-[0.3em] placeholder:text-gray-600 placeholder:tracking-normal focus:outline-none focus:ring-2 transition-all ${
+                    className={`w-full border-0 border-b bg-transparent px-4 py-3.5 text-center text-lg tracking-[0.3em] text-foreground placeholder:text-muted-foreground placeholder:tracking-normal focus:outline-none ${
                       passkeyFormik.touched.passkey &&
                       passkeyFormik.errors.passkey
-                        ? "border-red-500/50 focus:ring-red-500/30"
-                        : "border-white/10 focus:ring-orange-500/30 focus:border-orange-500/50"
+                        ? "border-destructive"
+                        : "border-border focus:border-primary"
                     }`}
                   />
                   {passkeyFormik.touched.passkey &&
                     passkeyFormik.errors.passkey && (
-                      <p className="mt-1.5 text-xs text-red-400 text-center">
+                      <p className="mt-1.5 text-center text-xs text-destructive">
                         {passkeyFormik.errors.passkey}
                       </p>
                     )}
@@ -286,7 +282,7 @@ export default function LoginPage() {
                 <button
                   type="submit"
                   disabled={passkeyFormik.isSubmitting}
-                  className="w-full py-3.5 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 disabled:opacity-50"
+                  className="editorial-button w-full border border-primary bg-primary py-3.5 text-primary-foreground transition-colors hover:bg-background hover:text-foreground disabled:opacity-50"
                 >
                   Verify & Enter Dashboard
                 </button>
@@ -297,7 +293,7 @@ export default function LoginPage() {
                   setShowPasskeyModal(false);
                   useAuthStore.getState().logout();
                 }}
-                className="w-full mt-3 py-2 text-gray-500 hover:text-gray-300 text-sm transition-colors"
+                className="mt-3 w-full py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 Cancel
               </button>
