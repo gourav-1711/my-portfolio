@@ -74,7 +74,7 @@ export function ProjectsSection({
           transition={{ duration: 0.28, ease: "easeOut" }}
         >
           {filteredProjects.length > 0 ? (
-            <div className="grid grid-cols-2 gap-x-10 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-x-10 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
               {filteredProjects.map((project) => (
                 <ProjectCard key={project.id} project={project} />
               ))}
